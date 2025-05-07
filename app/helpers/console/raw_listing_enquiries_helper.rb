@@ -1,0 +1,2 @@
+module Console::RawListingEnquiriesHelper
+end

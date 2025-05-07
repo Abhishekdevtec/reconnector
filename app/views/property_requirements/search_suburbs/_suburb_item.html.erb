@@ -1,0 +1,21 @@
+<li class="flex items-center justify-between gap-x-6 py-5 px-4">
+  <div class="min-w-0">
+    <div class="flex items-start gap-x-3">
+      <p class="text-sm font-semibold leading-6 text-gray-900"><%= suburb.label %></p>
+    </div>
+    <div class="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
+      <p class="whitespace-nowrap"><%= suburb.state.name %></p>
+      <svg viewBox="0 0 2 2" class="h-0.5 w-0.5 fill-current">
+        <circle cx="1" cy="1" r="1" />
+      </svg>
+      <p class="truncate"><%= suburb.state.country.name %></p>
+    </div>
+  </div>
+  <div class="flex flex-none items-center gap-x-4">
+    <% if action == :add %>
+      <%= tag.button 'Add suburb', data: { action: 'property-requirements#addSuburb', suburb_id: suburb.id, suburb_name: suburb.label }, class: 'hidden rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block' %>
+    <% elsif action == :delete %>
+      <%= tag.button 'Delete suburb', data: { action: 'property-requirements#addSuburb', suburb_id: suburb.id, suburb_name: suburb.label }, class: 'hidden rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block' %>
+    <% end %>
+  </div>
+</li>

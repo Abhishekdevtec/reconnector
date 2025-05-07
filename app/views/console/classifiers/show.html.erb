@@ -1,0 +1,15 @@
+<%= render 'console/shared/account_page_header' %>
+
+<main class="container mx-auto">
+  <p id="notice"><%= notice %></p>
+
+  <%= render @classifier.account %>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @classifier.name %>
+  </p>
+
+  <%= link_to 'Edit', edit_console_account_classifier_path(@account, @classifier) %> |
+  <%= link_to 'Back', console_account_classifiers_path(@account) %>
+</main>

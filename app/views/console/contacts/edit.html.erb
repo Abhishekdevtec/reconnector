@@ -1,0 +1,6 @@
+<h1>Editing Contact</h1>
+
+<%= render 'form', contact: @contact %>
+
+<%= link_to 'Show', console_account_contact_path(@account, @contact.id) %> |
+<%= link_to 'Back', console_account_contacts_path(@account) %>

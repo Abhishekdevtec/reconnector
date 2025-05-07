@@ -1,0 +1,104 @@
+<div class="flex flex-col">
+  <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+      <div class="relative overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+        <%= tag.table data: { controller: :'table-checkbox-toggle' }, class: 'min-w-full table-fixed divide-y divide-gray-300' do %>
+          <thead class="bg-gray-100">
+            <tr class="space-x-4">
+              <th scope="col" class="relative w-12 px-6 sm:w-16 sm:px-8">
+                <%= tag.input data: { action: 'table-checkbox-toggle#toggle' }, type: :checkbox, class: 'absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 sm:left-6' %>
+              </th>
+
+              <% if sortable %>
+                <%= render Table::SortableHeaderComponent.new(header: 'ID', url: url_for(sort_attribute: :internal_id, sort_order: reverse_current_sort_order, search: params[:search])) %>
+              <% else %>
+                <th scope="col" class="py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">ID</th>
+              <% end %>
+
+              <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900">Contract</th>
+
+              <% if sortable %>
+                <%= render Table::SortableHeaderComponent.new(header: 'Unit', url: url_for(sort_attribute: :unit_suite_shop, sort_order: reverse_current_sort_order, search: params[:search])) %>
+              <% else %>
+                <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900">Unit</th>
+              <% end %>
+
+              <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900">Street</th>
+
+              <% if sortable %>
+                <%= render Table::SortableHeaderComponent.new(header: 'Suburb', url: url_for(sort_attribute: :city, sort_order: reverse_current_sort_order, search: params[:search])) %>
+              <% else %>
+                <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900">Suburb</th>
+              <% end %>
+
+              <% if sortable %>
+                <%= render Table::SortableHeaderComponent.new(header: 'Type', url: url_for(sort_attribute: :type, sort_order: reverse_current_sort_order, search: params[:search])) %>
+              <% else %>
+                <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900">Type</th>
+              <% end %>
+
+              <% if sortable %>
+                <%= render Table::SortableHeaderComponent.new(header: 'Total area', url: url_for(sort_attribute: :calculated_building_area, sort_order: reverse_current_sort_order, search: params[:search])) %>
+              <% else %>
+                <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900">Total Area</th>
+              <% end %>
+
+              <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900">Annual Gross Rent</th>
+              <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900">Sale Price</th>
+              <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900">Shared</th>
+              <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900"></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <% properties.each do |property| %>
+              <tr class="<%= cycle('bg-white', 'bg-gray-50') -%> space-x-2">
+                <td class="pl-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= check_box_tag 'property_ids[]', property.id, property_selected?(property.id), { data: { table_checkbox_toggle_target: 'checkbox' }, class: 'focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded' } %>
+                </td>
+                <td class="py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= property.internal_id %>
+                </td>
+                <td class="py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                  <%= property.try(:contract).try(:lease_sale_label) %>
+                </td>
+                <td class="py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                  <%= property.unit_suite_shop %>
+                </td>
+                <td class="py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                  <%= property.number_and_street %>
+                </td>
+                <td class="py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                  <%= property.city %>
+                </td>
+                <td class="py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                  <%= property.type_label %>
+                </td>
+                <td class="py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                  <%= "#{number_with_precision(property.building_area, precision: 0)} sqm." if property.building_area %>
+                </td>
+                <td class="py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                  <%= contract_total_annual_rent_label(property.contract) %>
+                </td>
+                <td class="py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                  <%= contract_sales_price_label(property.contract) %>
+                </td>
+                <td class="py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                  <% if property.shared? && property.agent_id != Current.agent.id %>
+                    <%= render BadgeComponent.new(text: property.agent.name, color: :blue) %>
+                  <% elsif property.shared? %>
+                    <%= render BadgeComponent.new(text: 'Shared', color: :blue) %>
+                  <% else %>
+                    <%= render BadgeComponent.new(text: 'Not shared', color: :gray) %>
+                  <% end %>
+                </td>
+                <td class="py-4 whitespace-nowrap text-sm font-medium">
+                  <%= link_to 'View', property, class: 'text-indigo-600 hover:text-indigo-900' %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

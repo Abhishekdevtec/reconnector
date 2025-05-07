@@ -1,0 +1,149 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Property:</strong>
+  <%= @contract.property.id %>
+</p>
+
+<p>
+  <strong>For sale:</strong>
+  <%= @contract.for_sale %>
+</p>
+
+<p>
+  <strong>For lease:</strong>
+  <%= @contract.for_lease %>
+</p>
+
+<p>
+  <strong>Sale price cents:</strong>
+  <%= @contract.sale_price_cents %>
+</p>
+
+<p>
+  <strong>Sale price from cents:</strong>
+  <%= @contract.sale_price_from_cents %>
+</p>
+
+<p>
+  <strong>Sale price to cents:</strong>
+  <%= @contract.sale_price_to_cents %>
+</p>
+
+<p>
+  <strong>Sale auction venue:</strong>
+  <%= @contract.sale_auction_venue %>
+</p>
+
+<p>
+  <strong>Sale inspection on:</strong>
+  <%= @contract.sale_inspection_on %>
+</p>
+
+<p>
+  <strong>Sale reserve price cents:</strong>
+  <%= @contract.sale_reserve_price_cents %>
+</p>
+
+<p>
+  <strong>Sale actual sale price cents:</strong>
+  <%= @contract.sale_actual_sale_price_cents %>
+</p>
+
+<p>
+  <strong>Private treaty minimum price cents:</strong>
+  <%= @contract.private_treaty_minimum_price_cents %>
+</p>
+
+<p>
+  <strong>Private treaty target price cents:</strong>
+  <%= @contract.private_treaty_target_price_cents %>
+</p>
+
+<p>
+  <strong>Eoi close on:</strong>
+  <%= @contract.eoi_close_on %>
+</p>
+
+<p>
+  <strong>Eoi inspection on:</strong>
+  <%= @contract.eoi_inspection_on %>
+</p>
+
+<p>
+  <strong>Eoi minimum price cents:</strong>
+  <%= @contract.eoi_minimum_price_cents %>
+</p>
+
+<p>
+  <strong>Eoi target price cents:</strong>
+  <%= @contract.eoi_target_price_cents %>
+</p>
+
+<p>
+  <strong>Lease net rent cents:</strong>
+  <%= @contract.lease_net_rent %>
+</p>
+
+<p>
+  <strong>Lease outgoings cents:</strong>
+  <%= @contract.lease_outgoings %>
+</p>
+
+<p>
+  <strong>Lease gross rent cents:</strong>
+  <%= @contract.lease_gross_rent %>
+</p>
+
+<p>
+  <strong>Lease cleaning cents:</strong>
+  <%= @contract.lease_cleaning_cents %>
+</p>
+
+<p>
+  <strong>Lease covered parking space cents:</strong>
+  <%= @contract.lease_covered_parking_space_cents %>
+</p>
+
+<p>
+  <strong>Lease on grade parking space cents:</strong>
+  <%= @contract.lease_on_grade_parking_space_cents %>
+</p>
+
+<p>
+  <strong>Lease other rental costs cents:</strong>
+  <%= @contract.lease_other_rental_costs_cents %>
+</p>
+
+<p>
+  <strong>Lease commencement on:</strong>
+  <%= @contract.lease_commencement_on %>
+</p>
+
+<p>
+  <strong>Lease expires on:</strong>
+  <%= @contract.lease_expires_on %>
+</p>
+
+<p>
+  <strong>Lease term:</strong>
+  <%= @contract.lease_term %>
+</p>
+
+<p>
+  <strong>Lease rent review on:</strong>
+  <%= @contract.lease_rent_review_on %>
+</p>
+
+<p>
+  <strong>Lease escalation rate:</strong>
+  <%= @contract.lease_escalation_rate %>
+</p>
+
+<p>
+  <strong>Lease escalation formulae:</strong>
+  <%= @contract.lease_escalation_formulae %>
+</p>
+
+<%= link_to 'Edit', edit_console_account_property_contract_path(@account, @property) %> |
+<%= link_to 'Back', [:console, @account, @property] %>

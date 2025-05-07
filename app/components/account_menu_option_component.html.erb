@@ -1,0 +1,4 @@
+<%= link_to @url, @options do %>
+  <%= render AccountMenuOptionIconComponent.new(icon: @icon, active: @active) %>
+  <span><%= @name %></span>
+<% end %>

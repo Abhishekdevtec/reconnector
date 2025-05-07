@@ -1,0 +1,48 @@
+/* Fixes for flex support */
+
+.pdf-flex {
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-box;
+}
+
+.pdf-grow {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.pdf-flex-col {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.pdf-justify-between {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.pdf-justify-center {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: center;
+  -ms-flex-pack: justify;
+  justify-content: center;
+}
+
+.pdf-align-center {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.pdf-flex-wrap {
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-box-wrap: wrap;
+}

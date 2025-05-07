@@ -1,0 +1,178 @@
+<% content_for :page_title do %><%= @property.name_label %> (Property) | Reconnector.app<% end %>
+
+<%= render partial: 'properties/property_header', locals: { property: @property } %>
+
+<div>
+
+  <div class="w-full space-y-6">
+
+    <%= render partial: 'properties/property_tabs', locals: { property: @property } %>
+
+    <div class="<%= cycle('bg-white', 'bg-gray-50') %> shadow overflow-hidden sm:rounded-lg">
+
+      <div class="border-t border-gray-200">
+        <dl>
+          <div class="<%= cycle('bg-white', 'bg-gray-50') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">
+              Property type
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <%= @property.type_label %>
+            </dd>
+          </div>
+          <div class="<%= cycle('bg-white', 'bg-gray-50') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">
+              Usages
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <% if @property.usages.any? %>
+                <%= @property.usages.join(', ').humanize %>
+              <% else %>
+                None
+              <% end %>
+            </dd>
+          </div>
+          <div class="<%= cycle('bg-white', 'bg-gray-50') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">
+              Address
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <%= @property.full_address %>
+            </dd>
+          </div>
+          <div class="<%= cycle('bg-white', 'bg-gray-50') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">
+              Internal ID
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <%= @property.internal_id %>
+            </dd>
+          </div>
+          <div class="<%= cycle('bg-white', 'bg-gray-50') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">
+              Brochure Description
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <%= @property.brochure_description %>
+            </dd>
+          </div>
+          <div class="<%= cycle('bg-white', 'bg-gray-50') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">
+              Website Description
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <%= @property.website_description %>
+            </dd>
+          </div>
+          <div class="<%= cycle('bg-white', 'bg-gray-50') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">
+              <span class="inline-flex items-center">
+                Photos
+                <% if @property.images.empty? %>
+                  <svg class="ml-2 h-4 w-4 text-red-400" fill="currentColor" viewBox="0 0 8 8">
+                    <circle cx="4" cy="4" r="3" />
+                  </svg>
+                <% end %>
+              </span>
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <ul role="list" class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-4 lg:grid-cols-3 xl:gap-x-8">
+                <% if @property.images.attached? %>
+                  <% @property.images.each do |img| %>
+                    <li class="relative" title="<%= img.filename %>">
+                      <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                        <%= image_tag img, class: 'object-cover pointer-events-none group-hover:opacity-75' %>
+                        <button type="button" class="absolute inset-0 focus:outline-none">
+                          <span class="sr-only">View details for IMG_4985.HEIC</span>
+                        </button>
+                      </div>
+                      <p class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none"><%= img.filename %></p>
+                      <p class="block text-sm font-medium text-gray-500 pointer-events-none"><%= number_to_human_size img.byte_size %></p>
+                    </li>
+                  <% end %>
+                <% else %>
+                  <li>
+                    <p>No photos uploaded.</p>
+                  </li>
+                <% end %>
+              </ul>
+            </dd>
+          </div>
+          <div class="<%= cycle('bg-white', 'bg-gray-50') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">
+              Notes
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <%= @property.notes %>
+            </dd>
+          </div>
+          <div class="<%= cycle('bg-white', 'bg-gray-50') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">
+              <span class="inline-flex items-center">
+                Website URL
+                <% if @property.website_url.blank? %>
+                  <svg class="ml-2 h-4 w-4 text-red-400" fill="currentColor" viewBox="0 0 8 8">
+                    <circle cx="4" cy="4" r="3" />
+                  </svg>
+                <% end %>
+              </span>
+            </dt>
+            <dd class="flex mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <!-- Heroicon name: outline/external-link -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+              </svg>
+              <%= link_to @property.website_url, @property.website_link, target: '_blank', class: 'ml-3 flex-auto truncate text-gray-600 hover:text-gray-800' %>
+            </dd>
+          </div>
+          <div class="<%= cycle('bg-white', 'bg-gray-50') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">
+              <span class="inline-flex items-center">
+                Files
+                <% if @property.files.empty? %>
+                  <svg class="ml-2 h-4 w-4 text-red-400" fill="currentColor" viewBox="0 0 8 8">
+                    <circle cx="4" cy="4" r="3" />
+                  </svg>
+                <% end %>
+              </span>
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <ul role="list" class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-4 lg:grid-cols-3 xl:gap-x-8">
+                <% if @property.files.any? %>
+                  <% @property.files.each do |file| %>
+                    <li class="relative" title="<%= file.filename %>">
+                      <div class="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                        <%= link_to file, target: :blank do %>
+                          <div class="object-cover pointer-events-none group-hover:opacity-75 h-full flex-shrink-0">
+                            <span class="flex items-center justify-center w-full h-full">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-12 h-12">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                              </svg>
+                            </span>
+                          </div>
+                          <button type="button" class="absolute inset-0 focus:outline-none">
+                            <span class="sr-only">View details for <%= file.filename %></span>
+                          </button>
+                        <% end %>
+                      </div>
+                      <p class="mt-2 block text-sm font-medium text-gray-900 truncate pointer-events-none"><%= file.filename %></p>
+                      <p class="block text-sm font-medium text-gray-500 pointer-events-none"><%= number_to_human_size file.byte_size %></p>
+                    </li>
+                  <% end %>
+                <% else %>
+                  <li>
+                    <p>No files uploaded.</p>
+                  </li>
+                <% end %>
+              </ul>
+            </dd>
+          </div>
+          <%= render 'show_area', property: @property %>
+          <%= render 'show_details', property: @property %>
+        </dl>
+      </div>
+    </div>
+
+  </div>
+</div>

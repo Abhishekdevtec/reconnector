@@ -1,0 +1,105 @@
+<%= render ErrorComponent.new(business.errors) if business.errors.any? %>
+
+<%= form_with(model: business) do |form| %>
+  <div class="space-y-8 divide-y divide-gray-200">
+    <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+      <div class="sm:col-span-6">
+        <p class="block text-sm font-medium text-gray-700">
+          Classifications
+        </p>
+        <div class="mt-2 p-4 grid grid-cols-1 gap-5 sm:grid-cols-4 rounded-lg border border-gray-300 shadow-sm bg-white">
+          <%= form.collection_check_boxes(:classifier_ids, @account.classifiers, :id, :name, { include_hidden: false }) do |b| %>
+            <div class="relative flex items-start">
+              <div class="flex items-center h-5">
+                <%= b.check_box class: 'focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded' %>
+              </div>
+              <div class="ml-2 text-sm">
+                <%= b.label class: 'font-medium text-gray-700' do %>
+                  <%= b.text.humanize %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="sm:col-span-4">
+        <div class="relative flex items-start">
+          <div class="flex h-6 items-center">
+            <%= form.check_box :share, class: 'h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600' %>
+          </div>
+          <div class="ml-3 text-sm leading-6">
+            <%= form.label :share, class: 'font-medium text-gray-900' %>
+            <span id="comments-description" class="text-gray-500"><span class="sr-only">Share </span>this contact with other agents.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sm:col-span-3">
+        <%= render FormLabelComponent.new(form: form, name: :business_name) %>
+        <%= render FormTextFieldComponent.new(form: form, name: :business_name) %>
+      </div>
+
+      <div class="sm:col-span-3">
+        <%= render FormLabelComponent.new(form: form, name: :legal_name) %>
+        <%= render FormTextFieldComponent.new(form: form, name: :legal_name) %>
+      </div>
+
+      <div class="sm:col-span-4">
+        <%= render FormLabelComponent.new(form: form, name: :email) %>
+        <%= render FormTextFieldComponent.new(form: form, name: :email, type: :email, autocomplete: 'email') %>
+      </div>
+
+      <div class="sm:col-span-4">
+        <%= render FormLabelComponent.new(form: form, name: :phone) %>
+        <%= render FormTextFieldComponent.new(form: form, name: :phone, type: :phone, autocomplete: 'phone') %>
+      </div>
+
+      <div class="sm:col-span-3">
+        <%= render FormLabelComponent.new(form: form, name: :mobile) %>
+        <%= render FormTextFieldComponent.new(form: form, name: :mobile, type: :phone, autocomplete: 'mobile') %>
+      </div>
+
+      <div class="sm:col-span-3">
+        <%= render FormLabelComponent.new(form: form, name: :fax) %>
+        <%= render FormTextFieldComponent.new(form: form, name: :fax, type: :phone, autocomplete: 'fax') %>
+      </div>
+
+      <div class="sm:col-span-4">
+        <%= render FormLabelComponent.new(form: form, name: :url) %>
+        <%= render FormTextFieldComponent.new(form: form, name: :url, autocomplete: 'url') %>
+      </div>
+
+      <div class="sm:col-span-4">
+        <%= render FormLabelComponent.new(form: form, name: :registration) %>
+        <%= render FormTextFieldComponent.new(form: form, name: :registration, autocomplete: 'registration') %>
+      </div>
+
+      <div class="sm:col-span-4">
+        <%= form.label :notes %>
+        <%= form.rich_text_area :notes %>
+      </div>
+
+     <div class="sm:col-span-6">
+        <%= form.fields_for :physical_address do |physical_address| %>
+          <%= render Forms::AddressFormComponent.new(form: physical_address, address_type: 'Physical address') %>
+        <% end %>
+      </div>
+
+      <div class="sm:col-span-6">
+        <%= form.fields_for :postal_address do |postal_address| %>
+          <%= render Forms::AddressFormComponent.new(form: postal_address, address_type: 'Postal address') %>
+        <% end %>
+      </div>
+
+      <div class="sm:col-span-6 flex justify-end">
+        <% if business.persisted? %>
+          <%= link_to 'Cancel', business, class: 'bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+        <% else %>
+          <%= link_to 'Cancel', [:contacts], class: 'bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+        <% end %>
+        <%= form.submit t('.save'), class: 'ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+      </div>
+    </div>
+  </div>
+<% end %>

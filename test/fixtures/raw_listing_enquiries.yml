@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: DomainComAuRawListingEnquiry
+  account: one
+  body: '{}'
+
+two:
+  type: RealestateComAuListingEnquiry
+  account: one
+  body: '{}'
+
+# == Schema Information
+#
+# Table name: raw_listing_enquiries
+#
+#  account_id :bigint           not null
+#  body       :jsonb
+#  created_at :datetime         not null
+#  id         :bigint           not null, primary key
+#  type       :string
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_raw_listing_enquiries_on_account_id  (account_id)
+#

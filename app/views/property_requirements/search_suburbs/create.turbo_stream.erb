@@ -1,0 +1,13 @@
+<%= turbo_stream.replace 'search_suburb_results' do %>
+  <div  id="search_suburb_results" class="relative">
+    <div class="absolute w-full z-50">
+      <div class="bg-white shadow-lg sm:rounded-lg mt-4">
+        <ul role="list" class="divide-y divide-gray-100">
+          <% @suburbs.each do |suburb| %>
+            <%= render partial: 'suburb_item', locals: { suburb: suburb, action: :add } %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+<% end %>

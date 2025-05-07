@@ -1,0 +1,22 @@
+<div class="sm:hidden">
+  <label for="tabs" class="sr-only">Select a tab</label>
+  <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
+  <select id="tabs" name="tabs" class="block w-full focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md">
+    <option <%= 'selected' if @selected_account_menu_option == :account %>>Account</option>
+    <option <%= 'selected' if @selected_account_menu_option == :agents %>>Agents</option>
+    <option <%= 'selected' if @selected_account_menu_option == :microsoft_graph_settings %>>Microsoft Graph</option>
+    <option <%= 'selected' if @selected_account_menu_option == :listings %>>Property portals</option>
+    <option <%= 'selected' if @selected_account_menu_option == :billing %>>Billing</option>
+  </select>
+</div>
+<div class="hidden sm:block">
+  <div class="border-b border-gray-200">
+    <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+      <%= render AccountMenuOptionComponent.new(url: edit_account_path, name: 'Account', active: @selected_account_menu_option == :account, icon: :account) %>
+      <%= render AccountMenuOptionComponent.new(url: account_agents_path, name: 'Agents', active: @selected_account_menu_option == :agents, icon: :agents) %>
+      <%= render AccountMenuOptionComponent.new(url: edit_account_microsoft_graph_settings_path, name: 'Microsoft Graph', active: @selected_account_menu_option == :microsoft_graph_settings, icon: :cog) %>
+      <%= render AccountMenuOptionComponent.new(url: edit_account_listings_path, name: 'Property portals', active: @selected_account_menu_option == :listings, icon: :listings) %>
+      <%= render AccountMenuOptionComponent.new(url: "#", name: 'Billing', active: @selected_account_menu_option == :billing, icon: :billing) %>
+    </nav>
+  </div>
+</div>

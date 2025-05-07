@@ -1,0 +1,24 @@
+<% content_for :page_title do %>Contacts | Reconnector.app<% end %>
+
+<%= render Page::HeaderComponent.new('Contacts') do %>
+  <%= new_individual_button %>
+  <%= new_business_button %>
+<% end %>
+
+<% content_for :page_tabs do %>
+  <div></div>
+  <% contact_index_tabs %>
+<% end %>
+
+  <% if @contacts.empty? %>
+  <% else %>
+    <%= form_tag edit_multiple_properties_path do %>
+      <div class="mt-6 space-y-6">
+        <%= render partial: 'table', locals: { contacts: @contacts } %>
+      </div>
+    <% end %>
+  <% end %>
+
+<div class="w-full flex justify-center">
+  <%= pagination_navigation(@pagy) %>
+</div>

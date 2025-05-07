@@ -1,0 +1,60 @@
+<% content_for :page_title do %>Enquiry | Reconnector.app<% end %>
+
+<div class="flex flex-col space-y-8">
+
+  <div class="mt-8">
+    <%= render HeaderComponent.new(text: 'Enquiry') %>
+  </div>
+
+  <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+    <div class="flex flex-row flex-nowrap justify-between items-center px-4 py-6 sm:px-6">
+      <div>
+        <h3 class="text-base font-semibold leading-7 text-gray-900">Enquiry information</h3>
+        <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500"><%= render TimeWithZoneComponent.new(date_time: @listing_enquiry.enquired_at, format: :long) %></p>
+      </div>
+      <div>
+        <span class="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"><%= @listing_enquiry.property_portal.humanize %></span>
+        <% if @listing_enquiry.reference_id.present? %>
+          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Reference ID: <%= @listing_enquiry.reference_id %></p>
+        <% end %>
+      </div>
+    </div>
+    <div class="border-t border-gray-100">
+      <dl class="divide-y divide-gray-100">
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-900">Full name</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @listing_enquiry.sender_name %></dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-900">Email address</dt>
+          <dd class="mt-1 text-sm leading-6 text-indigo-500 sm:col-span-2 sm:mt-0"><%= mail_to @listing_enquiry.sender_email %></dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-900">Phone</dt>
+          <dd class="mt-1 text-sm leading-6 text-indigo-700 sm:col-span-2 sm:mt-0"><%= phone_to @listing_enquiry.sender_phone %></dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-900">Message</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @listing_enquiry.message %></dd>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-900">Property information</dt>
+          <% if @listing_enquiry.property_id.present? %>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @listing_enquiry.property.name_label %> - <%= @listing_enquiry.property.type_label %> - <%= @listing_enquiry.property.number_and_street %> <%= @listing_enquiry.property.city_and_state %></dd>
+            <dd class="justify-self-end"><%= link_to 'View property', @listing_enquiry.property, class: 'rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50' %></dd>
+          <% else %>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">Could not find the corresponding property in Reconnector.</dd>
+          <% end %>
+        </div>
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-900">Contact information</dt>
+          <% if @listing_enquiry.contact_id.present? %>
+            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @listing_enquiry.contact.name %></dd>
+            <dd class="justify-self-end"><%= link_to "View contact", @listing_enquiry.contact, class: 'rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50' %></dd>
+          <% end %>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+</div>

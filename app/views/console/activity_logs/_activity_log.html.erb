@@ -1,0 +1,9 @@
+<p>
+  <% if activity_log.agent.present? %>
+    <%= activity_log.agent.name %> |
+  <% end %>
+  <%= activity_log.action %> |
+  <%= activity_log.result %> |
+  <%= activity_log.body %> |
+  <%= activity_log.payload %>
+</p>

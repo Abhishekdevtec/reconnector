@@ -1,0 +1,59 @@
+<div class="isolate bg-white px-6 py-20 sm:py-24 lg:px-8">
+  <div class="mx-auto max-w-2xl text-center">
+    <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Request access</h2>
+    <p class="mt-2 text-lg leading-8 text-slate-600">We need some basic information about your company to get started.</p>
+  </div>
+  <%= form_with(model: @access_request, class: 'mx-auto mt-8 max-w-xl sm:mt-16') do |form| %>
+    <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+      <div>
+        <%= form.label :first_name, class: "block text-sm font-semibold leading-6 text-slate-900 #{ class_names( { 'text-red-500': form.object.errors[:first_name].any? } ) }" %>
+        <div class="mt-2.5">
+          <%= form.text_field :first_name, class: "block w-full rounded-md border-0 px-3.5 py-2 text-slate-900 shadow-sm ring-1 ring-inset placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 #{ form.object.errors[:first_name].any? ? 'ring-red-500' : 'ring-slate-900/20' }" %>
+        </div>
+      </div>
+      <div>
+        <%= form.label :last_name, class: "block text-sm font-semibold leading-6 text-slate-900 #{ class_names( { 'text-red-500': form.object.errors[:last_name].any? } ) }" %>
+        <div class="mt-2.5">
+          <%= form.text_field :last_name, class: "block w-full rounded-md border-0 px-3.5 py-2 text-slate-900 shadow-sm ring-1 ring-inset placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 #{ form.object.errors[:last_name].any? ? 'ring-red-500' : 'ring-slate-900/20' }" %>
+        </div>
+      </div>
+      <div class="sm:col-span-2">
+        <%= form.label :company, class: "block text-sm font-semibold leading-6 text-slate-900 #{ class_names( { 'text-red-500': form.object.errors[:company].any? } ) }" %>
+        <div class="mt-2.5">
+          <%= form.text_field :company, class: "block w-full rounded-md border-0 px-3.5 py-2 text-slate-900 shadow-sm ring-1 ring-inset placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 #{ form.object.errors[:company].any? ? 'ring-red-500' : 'ring-slate-900/20' }" %>
+        </div>
+      </div>
+      <div class="sm:col-span-2">
+        <%= form.label :agent_count, class: "block text-sm font-semibold leading-6 text-slate-900 #{ class_names( { 'text-red-500': form.object.errors[:agent_count].any? } ) }" %>
+        <div class="mt-2.5">
+          <%= form.text_field :agent_count, class: "block w-full rounded-md border-0 px-3.5 py-2 text-slate-900 shadow-sm ring-1 ring-inset placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 #{ form.object.errors[:agent_count].any? ? 'ring-red-500' : 'ring-slate-900/20' }" %>
+        </div>
+      </div>
+      <div class="sm:col-span-2">
+        <%= form.label :email, class: "block text-sm font-semibold leading-6 text-slate-900 #{ class_names( { 'text-red-500': form.object.errors[:email].any? } ) }" %>
+        <div class="mt-2.5">
+          <%= form.text_field :email, class: "block w-full rounded-md border-0 px-3.5 py-2 text-slate-900 shadow-sm ring-1 ring-inset placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 #{ form.object.errors[:email].any? ? 'ring-red-500' : 'ring-slate-900/20' }" %>
+        </div>
+      </div>
+      <div class="sm:col-span-2">
+        <%= form.label :phone, class: 'block text-sm font-semibold leading-6 text-slate-900' do %>
+          Phone number (optional)
+        <% end %>
+        <div class="mt-2.5">
+          <%= form.text_field :phone, class: 'block w-full rounded-md border-0 px-3.5 py-2 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6' %>
+        </div>
+      </div>
+      <div class="sm:col-span-2">
+        <%= form.label :request, class: 'block text-sm font-semibold leading-6 text-slate-900' do %>
+          Specific requests, questions, or comments (optional)
+        <% end %>
+        <div class="mt-2.5">
+          <%= form.text_area :request, class: 'block w-full rounded-md border-0 px-3.5 py-2 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6' %>
+        </div>
+      </div>
+    </div>
+    <div class="mt-10">
+      <%= form.submit 'Request access now', class: 'block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600' %>
+    </div>
+  <% end %>
+</div>

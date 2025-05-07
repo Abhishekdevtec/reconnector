@@ -1,0 +1,70 @@
+<% if contact&.first_name&.present? %>
+  <p class="mb-4">Hello <%= contact.first_name %>,</p>
+<% else %>
+  <p class="mb-4">Hello,</p>
+<% end %>
+<%= body.html_safe %>
+<div class="mb-4">
+  <% if agent.mobile.present? %>
+    <p class="block text-sm">Mobile:&nbsp;<%= agent.mobile %></p>
+  <% end %>
+
+  <% if agent.phone.present? %>
+    <p class="block text-sm">Phone:&nbsp;<%= agent.phone %></p>
+  <% end %>
+
+  <% if agent.fax.present? %>
+    <p class="block text-sm">Fax:&nbsp;<%= agent.fax %></p>
+  <% end %>
+</div>
+
+<% properties.each do |property| %>
+  <div class="bg-white border border-gray-200 rounded p-8 mb-4 shadow-md">
+    <div class="flex mb-4">
+      <h2><%= property.name %></h2>
+      <p class="text-sm text-gray-500">ID:&nbsp;<%= property.internal_id %></p>
+    </div>
+
+    <% if property.images.attached? %>
+      <%= image_tag Rails.application.routes.url_helpers.rails_blob_url(property.images.first), class: 'w-full h-auto mb-4' %>
+    <% end %>
+    
+    <div class="mb-4">
+      <div class="flex">
+        <p class="font-bold leading-snug"><%= property.city_and_state %></p>
+        <p class="leading-snug"><span class="text-gray-500 text-sm">Total area:</span>&nbsp;<span class="font-bold"><%= property.building_area.to_i %> m<sup>2</sup></span></p>
+      </div>
+
+      <% if property.contract.present? %>
+        <div class="flex">
+          <% if property.contract.for_sale? %>
+            <% if property.contract.sale_actual_sale_price&.positive? %>
+              <p class="leading-snug"><span class="text-gray-500 text-sm">For sale:</span>&nbsp;<span class="font-bold"><%= number_to_currency(property.contract.sale_actual_sale_price, locale: :'en-AU') %></span></p>
+            <% else %>
+              <p class="font-bold leading-snug">For sale</p>
+            <% end %>
+          <% end%>
+
+          <% if property.contract.for_lease? %>
+            <% if property.contract.lease_total_net_rent&.positive? %>
+              <p class="leading-snug"><span class="text-gray-500 text-sm">For lease:</span>&nbsp;<span class="font-bold"><%= number_to_currency(property.contract.lease_total_net_rent, locale: :'en-AU') %></span></p>
+            <% else %>
+              <p class="font-bold leading-snug">For lease</p>
+            <% end %>
+          <% end%>
+        </div>
+      <% end %>
+    </div>
+
+    <% if property.website_url&.present? %>
+      <div class="p-8 flex justify-center">
+        <%= tag.a('View details in your browser', href: property.website_url.html_safe, class: 'truncate inline-flex items-center px-6 py-3 border border-transparent text-base no-underline font-medium rounded-md shadow-sm text-white bg-blue-600') %>
+      </div>
+    <% end %>
+
+    <div class="mb-4"><%= property.brochure_description %></div>
+
+  </div>
+<% end %>
+
+<p class="text-sm text-gray-500 mb-4">You are receiving this email because you have contacted <%= agent.account.company_name %> and you are currently searching for commercial, industrial and/or retail properties.</p>

@@ -1,0 +1,14 @@
+<%= render Console::PageHeaderComponent.new(@account.company_name) do |header_component| %>
+  <% header_component.with_tabs([
+    { title: 'Account', path: console_account_path(@account) },
+    { title: 'Agents', path: console_account_agents_path(@account) },
+    { title: 'Properties', path: console_account_properties_path(@account) },
+    { title: 'Contacts', path: console_account_contacts_path(@account) },
+    { title: 'Classifiers', path: console_account_classifiers_path(@account) }
+  ]) %>
+  <% header_component.with_buttons([
+    { title: 'New contact', path: new_console_account_contact_path(@account), primary: true, icon: :new }
+  ]) %>
+<% end %>
+
+<%= render partial: 'contacts', locals: { contacts: @contacts } %>

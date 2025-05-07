@@ -1,0 +1,18 @@
+<%= turbo_stream.update @target do %>
+  <% if @addresses&.any? %>
+    <!-- Results, show/hide based on command palette state -->
+    <ul class="max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800" id="address-search-results" role="listbox" data-address-search-target="results">
+      <!-- Active: "bg-indigo-600 text-white" -->
+      <% @addresses.each do |address| %>
+        <li class="hover:bg-indigo-600 hover:text-white cursor-default select-none px-4 py-2" id="option-1" role="option" tabindex="-1" data-action="click->address-search#set_fields" data-address-search-street-number-value="<%= address.house_number %>" data-address-search-street-name-value="<%= address.road %>" data-address-search-suburb-value="<%= address.suburb %>" data-address-search-postcode-value="<%= address.postcode %>" data-address-search-state-value="<%= address.state %>" data-address-search-country-value="<%= address.country %>">
+          <%= [address.house_number, address.road, address.city, address.postcode, address.suburb, address.state, address.country].compact.join ', ' %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <ul class="max-h-72 scroll-py-2 overflow-y-auto opacity-0 hidden" id="address-search-results" role="listbox" data-address-search-target="results"></ul>
+    <!-- Empty state, show/hide based on command palette state -->
+    <p class="p-4 text-sm text-gray-500">No addresses found.</p>
+
+  <% end %>
+<% end %>

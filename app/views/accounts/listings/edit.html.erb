@@ -1,0 +1,175 @@
+<%= render Page::HeaderComponent.new('Property portal settings') %>
+
+<div class="w-full">
+  <%= render 'accounts/account_menu_options' %>
+  <div>
+    <%= form_with model: @account do |form| %>
+      <div class="space-y-8 divide-y divide-gray-200">
+        <div class="space-y-8 divide-y divide-gray-200">
+          <div class="mt-6 space-y-6">
+            <div>
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Real Commercial
+              </h3>
+              <p class="mt-1 text-sm text-gray-500">
+                Configure your Real Commercial (realestate.com.au) Partner Platform API settings here. See <%= link_to 'https://partner.realestate.com.au/documentation/api/', 'https://partner.realestate.com.au/documentation/api/', target: '_blank', rel: 'nofollow', class: 'font-medium text-indigo-600 hover:text-indigo-500' %> for more information.
+              </p>
+            </div>
+            <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+              <div class="sm:col-span-2">
+                <%= render FormLabelComponent.new(form: form, name: :rea_client_id) %>
+                <%= render FormTextFieldComponent.new(form: form, name: :rea_client_id, autocomplete: 'rea-client-id') %>
+              </div>
+              <div class="sm:col-span-2">
+                <%= render FormLabelComponent.new(form: form, name: :rea_client_secret) %>
+                <%= render FormTextFieldComponent.new(form: form, name: :rea_client_secret, autocomplete: 'rea-client-secret') %>
+              </div>
+              <div class="sm:col-span-4">
+                <%= render FormLabelComponent.new(form: form, name: :rea_party_id) %>
+                <%= render FormTextFieldComponent.new(form: form, name: :rea_party_id, autocomplete: 'rea-party-id') %>
+              </div>
+            </div>
+            <div>
+              <h4 class="text-md leading-6 font-medium text-gray-900">
+                Leads API
+              </h4>
+
+              <%= form.fields_for :realestate_com_au_leads_api do |leads_api_form| %>
+                <%= leads_api_form.label :enabled, class: 'mt-4 relative inline-flex items-center cursor-pointer' do %>
+                  <%= leads_api_form.check_box :enabled, class: 'sr-only peer' %>
+                  <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-offset-2 peer-focus:ring-indigo-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                  <span class="ml-3 text-sm text-gray-900">Automatically fetch listing enquiries from Real Commercial.</span>
+                <% end %>
+              <% end %>
+
+            </div>
+          </div>
+
+          <div class="pt-8">
+            <div>
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Commercial Real Estate
+              </h3>
+              <p class="mt-1 text-sm text-gray-500">
+                Enter in your Commercial Real Estate (domain.com.au) account settings.
+              </p>
+            </div>
+            <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+              <div class="sm:col-span-2">
+                <%= render FormLabelComponent.new(form: form, name: :domain_com_au_agency_id) %>
+                <%= render FormTextFieldComponent.new(form: form, name: :domain_com_au_agency_id, autocomplete: 'domain-com-au-agency-id') %>
+              </div>
+            </div>
+            <div class="pt-4">
+              <h3 class="text-md leading-6 font-medium text-gray-900">
+                API keys & credentials
+              </h3>
+              <p class="mt-1 text-sm text-gray-500">
+                Configure your Domain.com.au API keys & credentials here (API V1). See <%= link_to 'https://developer.domain.com.au/', 'https://developer.domain.com.au/', target: '_blank', rel: 'nofollow', class: 'font-medium text-indigo-600 hover:text-indigo-500' %> for more information.
+              </p>
+            </div>
+            <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+              <div class="sm:col-span-2">
+                <%= render FormLabelComponent.new(form: form, name: :domain_com_au_client_id) %>
+                <%= render FormTextFieldComponent.new(form: form, name: :domain_com_au_client_id, autocomplete: 'domain-com-au-client-id') %>
+              </div>
+              <div class="sm:col-span-2">
+                <%= render FormLabelComponent.new(form: form, name: :domain_com_au_client_secret) %>
+                <%= render FormTextFieldComponent.new(form: form, name: :domain_com_au_client_secret, autocomplete: 'domain-com-au-client-secret') %>
+              </div>
+
+              <% if @account.domain_com_au_credentials? %>
+                <div class="sm:col-span-4">
+                  <%= link_to 'Connect to domain.com.au', authorization_code_grant_url(@account), class: 'inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+                  <%= link_to 'Connect to domain.com.au', new_accounts_domain_com_au_access_token_path, class: 'hidden inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+                  <% if @account.domain_com_au_access_token? %>
+                    <p class="mt-1 text-sm text-gray-500">Current access token expires on <%= render TimeWithZoneComponent.new(date_time: @account.domain_com_au_access_token_expires_at, format: :long, time_zone: @current_agent.time_zone) %></p>
+                  <% else %>
+                    <p class="mt-1 text-sm text-gray-500">No access token available.</p>
+                  <% end %>
+                </div>
+              <% end %>
+
+              <div class="sm:col-span-4">
+                <%= render FormLabelComponent.new(form: form, name: :domain_com_au_properties_and_locations_api_key) %>
+                <%= render FormTextFieldComponent.new(form: form, name: :domain_com_au_properties_and_locations_api_key, autocomplete: 'domain-com-au-properties-and-locations-api-key') %>
+              </div>
+              <div class="sm:col-span-4">
+                <%= render FormLabelComponent.new(form: form, name: :domain_com_au_price_estimation_api_key) %>
+                <%= render FormTextFieldComponent.new(form: form, name: :domain_com_au_price_estimation_api_key, autocomplete: 'domain-com-au-price-estimation-api-key') %>
+              </div>
+              <div class="sm:col-span-4">
+                <%= render FormLabelComponent.new(form: form, name: :domain_com_au_address_suggestions_api_key) %>
+                <%= render FormTextFieldComponent.new(form: form, name: :domain_com_au_address_suggestions_api_key, autocomplete: 'domain-com-au-address-suggestions-api-key') %>
+              </div>
+              <div class="sm:col-span-4">
+                <%= render FormLabelComponent.new(form: form, name: :domain_com_au_schools_data_api_key) %>
+                <%= render FormTextFieldComponent.new(form: form, name: :domain_com_au_schools_data_api_key, autocomplete: 'domain-com-au-schools-data-api-key') %>
+              </div>
+              <div class="sm:col-span-4">
+                <%= render FormLabelComponent.new(form: form, name: :domain_com_au_listings_management_api_key) %>
+                <%= render FormTextFieldComponent.new(form: form, name: :domain_com_au_listings_management_api_key, autocomplete: 'domain-com-au-listings-management-api-key') %>
+              </div>
+              <div class="sm:col-span-4">
+                <%= render FormLabelComponent.new(form: form, name: :domain_com_au_webhooks_api_key) %>
+                <%= render FormTextFieldComponent.new(form: form, name: :domain_com_au_webhooks_api_key, autocomplete: 'domain-com-au-webhooks-api-key') %>
+              </div>
+              <div class="sm:col-span-4">
+                <%= render FormLabelComponent.new(form: form, name: :domain_com_au_webhooks_id) %>
+                <%= render FormTextFieldComponent.new(form: form, name: :domain_com_au_webhooks_id, autocomplete: 'domain-com-au-webhooks-api-key') %>
+              </div>
+              <div class="sm:col-span-4">
+                <%= render FormLabelComponent.new(form: form, name: :domain_com_au_webhooks_verification_code) %>
+                <%= render FormTextFieldComponent.new(form: form, name: :domain_com_au_webhooks_verification_code, autocomplete: 'domain-com-au-webhooks-api-key') %>
+              </div>
+
+              <% if @domain_com_au_webhook_subscriptions.present? %>
+                <div class="sm:col-span-4">
+                  <div class="overflow-hidden bg-white shadow sm:rounded-md">
+                    <ul role="list" class="divide-y divide-gray-200">
+                      <% @domain_com_au_webhook_subscriptions.each do |webhook_subscription| %>
+                        <li>
+                          <div class="block hover:bg-gray-50">
+                            <div class="px-4 py-4 sm:px-6">
+                              <div class="flex items-center justify-between">
+                                <p class="truncate text-sm font-medium text-indigo-600"><%= webhook_subscription.resource_type %></p>
+                                <div class="ml-2 flex flex-shrink-0">
+                                  <%= link_to 'Delete', accounts_delete_domain_com_au_webhook_subscription_path(@account.id, webhook_subscription.id), data: { turbo_method: :delete }, class: 'inline-flex items-center rounded-full border border-gray-300 bg-white px-2.5 py-0.5 text-sm font-medium leading-5 text-gray-700 shadow-sm hover:bg-gray-50' %>
+                                </div>
+                              </div>
+                              <div class="mt-2 sm:flex sm:justify-between">
+                                <div class="sm:flex">
+                                  <p class="flex items-center text-sm text-gray-500">
+                                    <!-- Heroicon name: mini/circle-stack -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400">
+                                      <path fill-rule="evenodd" d="M10 1c3.866 0 7 1.79 7 4s-3.134 4-7 4-7-1.79-7-4 3.134-4 7-4zm5.694 8.13c.464-.264.91-.583 1.306-.952V10c0 2.21-3.134 4-7 4s-7-1.79-7-4V8.178c.396.37.842.688 1.306.953C5.838 10.006 7.854 10.5 10 10.5s4.162-.494 5.694-1.37zM3 13.179V15c0 2.21 3.134 4 7 4s7-1.79 7-4v-1.822c-.396.37-.842.688-1.306.953-1.532.875-3.548 1.369-5.694 1.369s-4.162-.494-5.694-1.37A7.009 7.009 0 013 13.179z" clip-rule="evenodd" />
+                                    </svg>
+                                    <%= webhook_subscription.id %>
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
+              <% end %>
+
+            </div>
+          </div>
+
+          <%= render partial: 'griffin_property_settings', locals: { form: form } %>
+        </div>
+
+        <div class="pt-5">
+          <div class="flex justify-end">
+            <%= link_to 'Cancel', agent_root_path, class: 'bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+            <%= form.submit 'Save', class: 'ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

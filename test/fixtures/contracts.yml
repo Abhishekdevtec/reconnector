@@ -1,0 +1,83 @@
+# == Schema Information
+#
+# Table name: contracts
+#
+#  created_at                         :datetime         not null
+#  eoi_close_on                       :date
+#  eoi_inspection_on                  :date
+#  eoi_minimum_price_cents            :bigint
+#  eoi_target_price_cents             :bigint
+#  for_lease                          :boolean          default(FALSE)
+#  for_sale                           :boolean          default(FALSE)
+#  id                                 :bigint           not null, primary key
+#  lease_cleaning_cents               :bigint
+#  lease_commencement_on              :date
+#  lease_covered_parking_space_cents  :bigint
+#  lease_escalation_formulae          :string
+#  lease_escalation_rate              :text
+#  lease_expires_on                   :date
+#  lease_gross_rent                   :decimal(20, 8)
+#  lease_net_rent                     :decimal(20, 8)
+#  lease_on_grade_parking_space_cents :bigint
+#  lease_other_rental_costs_cents     :bigint
+#  lease_outgoings                    :decimal(20, 8)
+#  lease_rent_review_on               :date
+#  lease_term                         :string
+#  private_treaty_minimum_price_cents :bigint
+#  private_treaty_target_price_cents  :bigint
+#  property_id                        :bigint           not null
+#  sale_actual_sale_price_cents       :bigint
+#  sale_auction_date                  :date
+#  sale_auction_venue                 :string
+#  sale_inspection_on                 :date
+#  sale_price_cents                   :bigint
+#  sale_price_from_cents              :bigint
+#  sale_price_to_cents                :bigint
+#  sale_reserve_price_cents           :bigint
+#  updated_at                         :datetime         not null
+#
+# Indexes
+#
+#  index_contracts_on_property_id  (property_id)
+#
+one:
+  property: with_contract
+  for_sale: false
+  for_lease: true
+
+updated_contract:
+  property: retail_property
+  for_sale: true
+  for_lease: true
+  sale_price_cents: 100
+  sale_price_from_cents: 100
+  sale_price_to_cents: 100
+  sale_auction_venue: Sellville
+  sale_auction_date: <%= Time.now %>
+  sale_inspection_on: <%= Time.now %>
+  sale_reserve_price_cents: 100
+  sale_actual_sale_price_cents: 100
+  private_treaty_minimum_price_cents: 100
+  private_treaty_target_price_cents: 100
+  eoi_close_on: <%= 10.days.from_now %>
+  eoi_inspection_on: <%= 30.days.ago %>
+  eoi_minimum_price_cents: 100
+  eoi_target_price_cents: 100
+  lease_cleaning_cents: 100
+  lease_covered_parking_space_cents: 100
+  lease_on_grade_parking_space_cents: 100
+  lease_other_rental_costs_cents: 100
+  lease_commencement_on:  <%= Time.now %>
+  lease_expires_on:  <%= 5.years.from_now %>
+  lease_term: 3 years
+  lease_rent_review_on:  <%= 60.days.from_now %>
+  lease_escalation_rate: 1.0
+  lease_escalation_formulae: Tip top
+  lease_net_rent: 1.0
+  lease_gross_rent: 1.0
+  lease_outgoings: 1.0
+
+kitchen_sink_contract:
+  property: with_kitchen_sink
+  for_sale: false
+  for_lease: true

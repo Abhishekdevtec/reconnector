@@ -1,0 +1,40 @@
+# == Schema Information
+#
+# Table name: listing_enquiries
+#
+#  account_id        :bigint
+#  agent_id          :bigint
+#  contact_id        :bigint
+#  created_at        :datetime         not null
+#  enquired_at       :datetime
+#  enquiry_id        :string
+#  id                :bigint           not null, primary key
+#  message           :text
+#  property_id       :integer
+#  property_portal   :string
+#  reference_id      :string
+#  sender_email      :string
+#  sender_first_name :string
+#  sender_last_name  :string
+#  sender_phone      :string
+#
+# Indexes
+#
+#  index_listing_enquiries_on_account_id   (account_id)
+#  index_listing_enquiries_on_agent_id     (agent_id)
+#  index_listing_enquiries_on_contact_id   (contact_id)
+#  index_listing_enquiries_on_property_id  (property_id)
+#
+one:
+  account: one
+  property: with_kitchen_sink
+  property_portal: MyString
+  enquiry_id: MyString
+  reference_id: MyString
+  sender_first_name: MyString
+  sender_last_name: MyString
+  sender_email: MyString
+  sender_phone: MyString
+  message: MyText
+  enquired_at: <%= Time.now %>
+

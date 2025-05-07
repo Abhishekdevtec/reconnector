@@ -1,0 +1,150 @@
+<div class="bg-white shadow overflow-hidden sm:rounded-lg">
+  <div class="px-4 py-5 sm:px-6">
+    <div class="flex items-center">
+      <div class="flex-grow">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          <%= contract.lease_sale_label %>
+        </h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">
+          last updated on <%= render TimeWithZoneComponent.new(date_time: contract.updated_at, format: :short, time_zone: @current_agent.time_zone) %>.
+        </p>
+      </div>
+      <div>
+        <span class="block">
+          <%= link_to property_contract_path(@property), data: { turbo_method: :delete }, class: 'inline-flex items-center px-4 py-2 border border-red-300 rounded-md shadow-sm text-sm font-medium text-red-700 bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-red-50 focus:ring-purple-500', role: 'button' do %>
+            <!-- Heroicon name: solid/trash -->
+            <svg class="-ml-1 mr-2 h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            Delete
+          <% end %>
+          <%= link_to edit_property_contract_path(@property), class: 'inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500', role: 'button' do %>
+            <!-- Heroicon name: solid/pencil -->
+            <svg class="-ml-1 mr-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            </svg>
+            Edit
+          <% end %>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-gray-200">
+    <dl>
+      <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <dt class="text-sm font-medium text-gray-500">
+          Contract type
+        </dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+          <%= contract.lease_sale_label %>
+        </dd>
+      </div>
+
+      <% if contract.for_sale? %>
+        <% %i[sale_price sale_price_from sale_price_to sale_reserve_price sale_actual_sale_price private_treaty_minimum_price private_treaty_target_price].each do |attr| %>
+          <div class="<%= cycle('bg-white', 'bg-gray-50', name: 'contract_bg_colors') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">
+              <%= attr.to_s.titleize %>
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <%= number_to_currency(contract.public_send(attr)) unless contract.public_send(attr).nil? %>
+            </dd>
+          </div>
+        <% end %>
+
+        <div class="<%= cycle('bg-white', 'bg-gray-50', name: 'contract_bg_colors') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-500">
+            Auction venue
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <%= contract.sale_auction_venue %>
+          </dd>
+        </div>
+        <div class="<%= cycle('bg-white', 'bg-gray-50', name: 'contract_bg_colors') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-500">
+            Sale inspection on
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <%= contract.sale_inspection_on&.to_formatted_s(:long) %>
+          </dd>
+        </div>
+      <% end %>
+
+      <% %i[eoi_minimum_price eoi_target_price].each do |attr| %>
+        <div class="<%= cycle('bg-white', 'bg-gray-50', name: 'contract_bg_colors') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-500">
+            <%= attr.to_s.titleize %>
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <%= number_to_currency(contract.public_send(attr)) unless contract.public_send(attr).nil? %>
+          </dd>
+        </div>
+      <% end %>
+      <% %i[eoi_close_on eoi_inspection_on].each do |attr| %>
+        <div class="<%= cycle('bg-white', 'bg-gray-50', name: 'contract_bg_colors') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-500">
+            <%= attr.to_s.titleize %>
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <%= contract[attr]&.to_formatted_s(:long) %>
+          </dd>
+        </div>
+      <% end %>
+
+      <% if contract.for_lease? %>
+        <% %w[lease_net_rent lease_total_net_rent lease_outgoings lease_total_outgoings lease_gross_rent lease_total_gross_rent lease_cleaning lease_covered_parking_space lease_on_grade_parking_space lease_other_rental_costs].each do |attr| %>
+          <div class="<%= cycle('bg-white', 'bg-gray-50', name: 'contract_bg_colors') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">
+              <%= attr.to_s&.titleize %>
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <%= number_to_currency(contract.public_send(attr)) unless contract.public_send(attr).nil?%>
+            </dd>
+          </div>
+        <% end %>
+        <% %i[lease_commencement_on lease_expires_on].each do |attr| %>
+          <div class="<%= cycle('bg-white', 'bg-gray-50', name: 'contract_bg_colors') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">
+              <%= attr.to_s&.titleize %>
+            </dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <%= contract[attr]&.to_formatted_s(:long) %>
+            </dd>
+          </div>
+        <% end %>
+        <div class="<%= cycle('bg-white', 'bg-gray-50', name: 'contract_bg_colors') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-500">
+            Lease term
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <%= contract.lease_term %>
+          </dd>
+        </div>
+        <div class="<%= cycle('bg-white', 'bg-gray-50', name: 'contract_bg_colors') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-500">
+            Lease rent review on
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <%= contract.lease_rent_review_on&.to_formatted_s(:long) %>
+          </dd>
+        </div>
+        <div class="<%= cycle('bg-white', 'bg-gray-50', name: 'contract_bg_colors') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-500">
+            Lease escalation rate
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <%= contract.lease_escalation_rate %>
+          </dd>
+        </div>
+        <div class="<%= cycle('bg-white', 'bg-gray-50', name: 'contract_bg_colors') %> px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-500">
+            Lease escalation formulae
+          </dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <%= contract.lease_escalation_formulae %>
+          </dd>
+        </div>
+      <% end %>
+    </dl>
+  </div>
+</div>

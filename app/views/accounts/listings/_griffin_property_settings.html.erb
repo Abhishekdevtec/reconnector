@@ -1,0 +1,32 @@
+<div class="pt-8">
+  <div>
+    <h3 class="text-lg leading-6 font-medium text-gray-900">
+      Company website
+    </h3>
+    <p class="mt-1 text-sm text-gray-500">
+      Enter in your FTP/API settings to upload to the company website.
+    </p>
+  </div>
+  <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+    <div class="sm:col-span-4">
+      <%= render FormLabelComponent.new(form: form, name: :griffin_property_com_au_api_token) %>
+      <%= render FormTextFieldComponent.new(form: form, name: :griffin_property_com_au_api_token) %>
+    </div>
+    <div class="sm:col-span-4">
+      <%= render FormLabelComponent.new(form: form, name: :griffin_property_host_url) %>
+      <%= render FormTextFieldComponent.new(form: form, name: :griffin_property_host_url) %>
+    </div>
+    <div class="sm:col-span-3">
+      <%= render FormLabelComponent.new(form: form, name: :griffin_property_username) %>
+      <%= render FormTextFieldComponent.new(form: form, name: :griffin_property_username) %>
+    </div>
+    <div class="sm:col-span-3">
+      <%= render FormLabelComponent.new(form: form, name: :griffin_property_password) %>
+      <%= render FormTextFieldComponent.new(form: form, name: :griffin_property_password, type: :password) %>
+    </div>
+    <div class="sm:col-span-4">
+      <%= render FormLabelComponent.new(form: form, name: :griffin_property_destination_folder) %>
+      <%= render FormTextFieldComponent.new(form: form, name: :griffin_property_destination_folder) %>
+    </div>
+  </div>
+</div>

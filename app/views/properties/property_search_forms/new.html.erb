@@ -1,0 +1,5 @@
+<% content_for :page_title do %>Advanced property search | Reconnector.app<% end %>
+
+<%= render Page::HeaderComponent.new('Property search') %>
+
+<%= render partial: 'properties/property_search_forms/form', locals: { property_search_form: @property_search_form } %>

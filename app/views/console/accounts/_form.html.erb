@@ -1,0 +1,78 @@
+<%= render Console::ContainerComponent.new do %>
+  <%= form_with(model: [:console, account]) do |form| %>
+    <div class="mt-6 space-y-6">
+      <%= render Console::FormSectionComponent.new(header: 'Account information', description: 'General information about the company.') do %>
+
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :company_name) %>
+          <%= render FormTextFieldComponent.new(form: form, name: :company_name, autocomplete: 'company-name') %>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :legal_name) %>
+          <%= render FormTextFieldComponent.new(form: form, name: :legal_name, autocomplete: 'legal-name') %>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :domain_name) %>
+          <div class="mt-1 flex rounded-md shadow-sm">
+            <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+              https://
+            </span>
+            <%= render FormTextFieldComponent.new(form: form, name: :domain_name, autocomplete: 'domain-name', class: 'flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300') %>
+          </div>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :email) %>
+          <%= render FormTextFieldComponent.new(form: form, name: :email, autocomplete: 'email') %>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :phone) %>
+          <%= render FormTextFieldComponent.new(form: form, name: :phone, type: :phone, autocomplete: 'phone') %>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :fax) %>
+          <%= render FormTextFieldComponent.new(form: form, name: :fax, type: :phone, autocomplete: 'fax') %>
+        </div>
+        <div class="col-span-6">
+          <label for="cover-photo" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">PDF Brochure logo</label>
+          <div class="mt-1 sm:col-span-2 sm:mt-0">
+            <div class="flex max-w-lg justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+              <div class="space-y-1 text-center">
+                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                  <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <div class="flex text-sm text-gray-600">
+                  <%= form.label :pdf_logo, class: 'relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500' do %>
+                    <span>Upload a file</span>
+                    <%= form.file_field :pdf_logo, multiple: false, direct_upload: true, accept: 'image/svg', class: 'sr-only' %>
+                  <% end %>
+                  <p class="pl-1">or drag and drop</p>
+                </div>
+                <p class="text-xs text-gray-500">SVG up to 10MB</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :primary_color) %>
+          <%= render FormTextFieldComponent.new(form: form, name: :primary_color) %>
+        </div>
+
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :secondary_color) %>
+          <%= render FormTextFieldComponent.new(form: form, name: :secondary_color) %>
+        </div>
+
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :brochure_disclaimer) %>
+          <%= render FormTextFieldComponent.new(form: form, name: :brochure_disclaimer) %>
+        </div>
+
+      <% end %>
+      <div class="flex justify-end">
+        <%= link_to 'Cancel', console_root_path, class: 'bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+        <%= form.submit class: 'ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

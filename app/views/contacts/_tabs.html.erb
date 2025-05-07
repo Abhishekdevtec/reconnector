@@ -1,0 +1,5 @@
+<%= render TabContainerComponent.new do |c| %>
+  <%= c.with_tab(name: 'Details',             url: object, active: @tab_option == :details) %>
+  <%= c.with_tab(name: 'Property requirements', url: contact_property_requirements_path(object), active: current_page?(contact_property_requirements_path(object))) %>
+  <%= c.with_tab(name: 'Email matching properties', url: new_contact_matching_properties_email_path(object), active: @tab_option == :matching_properties) %>
+<% end %>

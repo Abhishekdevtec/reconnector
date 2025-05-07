@@ -1,0 +1,44 @@
+<div class="flex flex-col">
+  <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+      <div class="relative overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+        <%= tag.table data: { controller: :'table-checkbox-toggle' }, class: 'min-w-full table-fixed divide-y divide-gray-300' do %>
+          <thead class="bg-gray-100">
+            <tr class="space-x-4">
+              <th scope="col" class="relative w-12 px-6 sm:w-16 sm:px-8 text-left text-sm font-semibold">Sent</th>
+              <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900">Name</th>
+              <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
+              <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900">Message</th>
+              <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900">Source</th>
+              <th scope="col" class="py-3.5 text-left text-sm font-semibold text-gray-900"></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <% listing_enquiries.each do |listing_enquiry| %>
+              <tr class="<%= cycle('bg-white', 'bg-gray-50') -%> space-x-2">
+                <td class="pl-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <%= render TimeWithZoneComponent.new(date_time: listing_enquiry.enquired_at, format: :short, time_zone: Current.agent.time_zone) %>
+                </td>
+                <td class="py-4 text-sm font-medium text-gray-500">
+                  <%= listing_enquiry.sender_name %>
+                </td>
+                <td class="py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                  <%= listing_enquiry.sender_email %>
+                </td>
+                <td class="py-4 text-sm font-medium text-gray-500 truncate">
+                  <%= listing_enquiry.message.truncate_words(8, omission: '...(continued)') if listing_enquiry.message.present? %>
+                </td>
+                <td class="py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                  <span class="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-600 ring-1 ring-inset ring-indigo-500/10"><%= listing_enquiry.property_portal.humanize %></span>
+                </td>
+                <td class="py-4 whitespace-nowrap text-sm font-medium text-indigo-500">
+                  <%= link_to 'View details', listing_enquiry %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

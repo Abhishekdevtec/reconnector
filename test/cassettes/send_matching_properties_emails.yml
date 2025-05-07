@@ -1,0 +1,220 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://exchange.iinet.net.au/EWS/Exchange.asmx
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"
+        xmlns:t=\"http://schemas.microsoft.com/exchange/services/2006/types\" xmlns:m=\"http://schemas.microsoft.com/exchange/services/2006/messages\">\n
+        \ <soap:Header>\n    <t:RequestServerVersion Version=\"Exchange2010\"/>\n
+        \ </soap:Header>\n  <soap:Body>\n    <CreateItem xmlns=\"http://schemas.microsoft.com/exchange/services/2006/messages\"
+        MessageDisposition=\"SendAndSaveCopy\">\n      <Items>\n        <t:Message>\n
+        \         <t:Subject>Monopoly International listings</t:Subject>\n          <t:Body
+        BodyType=\"HTML\">&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n  &lt;head&gt;\n    &lt;meta
+        http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /&gt;\n    &lt;style&gt;\n
+        \     body {\n        font-size: 1.15rem;\n        font-family: 'Roboto',
+        'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;\n        line-height:
+        2em;\n        font-weight: normal;\n        font-style: normal;\n        color:
+        #333;\n\n        max-width: 36rem;\n        margin: 0 auto;\n      }\n\n      h1,
+        h2, p {\n        margin: 0;\n      }\n\n      .space-x-2 &gt; * + * {\n        margin-left:
+        1rem;\n      }\n\n      .list-none {\n        list-style: none;\n      }\n\n
+        \     .flex {\n        display: flex;\n        flex-direction: row;\n        justify-content:
+        space-between;\n        align-items: center;\n      }\n\n      .flex-wrap
+        {\n        flex-wrap: wrap;\n      }\n\n      .justify-center {\n        justify-content:
+        center;\n      }\n\n      .inline-flex {\n        display: inline-flex;\n
+        \     }\n\n      .items-center {\n        align-items: center;\n      }\n\n
+        \     .bg-white {\n        background-color: #fff;\n      }\n\n      .rounded
+        {\n        border-radius: 0.25rem;\n      }\n\n      .rounded-md {\n        border-radius:
+        0.375rem;\n      }\n\n      .border {\n        border-width: 1px;\n        border-style:
+        solid;\n      }\n\n      .border-gray-200 {\n        border-color: #E5E7EB;\n
+        \     }\n\n      .border-transparent {\n        border-color: transparent;\n
+        \     }\n\n      .p-8 {\n        padding: 2rem;\n      }\n\n      .px-6 {\n
+        \       padding-left: 1.5rem;\n        padding-right: 1.5rem;\n      }\n\n
+        \     .py-3 {\n        padding-top: .75rem;\n        padding-bottom: .75rem;\n
+        \     }\n\n      .mb-4 {\n        margin-bottom: 1rem;\n      }\n\n      .shadow-md
+        {\n        box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0)
+        0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06)
+        0px 2px 4px -1px\n      }\n\n      .text-center {\n        text-align: center;\n
+        \     }\n\n      .text-base {\n        font-size: 1rem;\n        line-height:
+        1.5rem;\n      }\n\n      .text-sm {\n        font-size: 0.875rem;\n        line-height:
+        1.25rem;\n      }\n\n      .text-gray-500 {\n        color: #6B7280;\n      }\n\n
+        \     .text-white {\n        color: #fff;\n      }\n\n      .truncate {\n
+        \       white-space: nowrap;\n        overflow: hidden;\n        text-overflow:
+        ellipsis;\n      }\n\n      .no-underline {\n        text-decoration: none;\n
+        \     }\n\n      .leading-snug {\n        line-height: 1.375em;\n      }\n\n
+        \     .font-bold {\n        font-weight: bold;\n      }\n\n      .font-medium
+        {\n        font-weight: 500;\n      }\n\n      .w-full {\n        width: 100%;\n
+        \     }\n\n      .h-auto {\n        height: auto;\n      }\n\n      .bg-blue-600
+        {\n        background-color: #2563EB;\n      }\n\n      .bg-blue-700:hover
+        {\n        background-color: #4338CA;\n      }\n    &lt;/style&gt;\n  &lt;/head&gt;\n\n
+        \ &lt;body class=\"p-8\"&gt;\n    This is the body\n&lt;div class=\"mb-4\"&gt;\n\n\n&lt;/div&gt;\n\n
+        \ &lt;div class=\"bg-white border border-gray-200 rounded p-8 mb-4 shadow-md\"&gt;\n
+        \   &lt;div class=\"flex mb-4\"&gt;\n      &lt;h2&gt;The hippiest commercial
+        property in town&lt;/h2&gt;\n      &lt;p class=\"text-sm text-gray-500\"&gt;ID:&amp;nbsp;&lt;/p&gt;\n
+        \   &lt;/div&gt;\n\n    \n    &lt;div class=\"mb-4\"&gt;\n      &lt;div class=\"flex\"&gt;\n
+        \       &lt;p class=\"font-bold leading-snug\"&gt;&lt;/p&gt;\n        &lt;p
+        class=\"leading-snug\"&gt;&lt;span class=\"text-gray-500 text-sm\"&gt;Total
+        area:&lt;/span&gt;&amp;nbsp;&lt;span class=\"font-bold\"&gt;0 m&lt;sup&gt;2&lt;/sup&gt;&lt;/span&gt;&lt;/p&gt;\n
+        \     &lt;/div&gt;\n\n    &lt;/div&gt;\n\n\n    &lt;div class=\"mb-4\"&gt;&lt;/div&gt;\n\n
+        \ &lt;/div&gt;\n\n&lt;p class=\"text-sm text-gray-500 mb-4\"&gt;You are receiving
+        this email because you have contacted Monopoly International and you are currently
+        searching for commercial, industrial and/or retail properties.&lt;/p&gt;\n\n
+        \ &lt;/body&gt;\n&lt;/html&gt;\n</t:Body>\n          <t:Importance>Normal</t:Importance>\n
+        \         <t:ToRecipients>\n            <t:Mailbox>\n              <t:EmailAddress>grant.barry@free.fr</t:EmailAddress>\n
+        \           </t:Mailbox>\n          </t:ToRecipients>\n          <t:IsRead>true</t:IsRead>\n
+        \       </t:Message>\n      </Items>\n    </CreateItem>\n  </soap:Body>\n</soap:Envelope>\n"
+    headers:
+      User-Agent:
+      - HTTPClient/1.0 (2.8.3, ruby 3.1.0 (2021-12-25))
+      Accept:
+      - "*/*"
+      Date:
+      - Sat, 15 Oct 2022 05:30:26 GMT
+      Content-Type:
+      - text/xml
+      Cookie:
+      - ClientId=NEYVAMPO0CUXSHQAURA
+      Authorization:
+      - Negotiate TlRMTVNTUAADAAAAGAAYAEAAAAACAQIBWAAAAAAAAABaAQAAPAA8AFoBAAAmACYAlgEAAAAAAAC8AQAABYKJAkHndsvjdNrSmv3yyRQtMIqIKUSq6EvB4Pw1RIEnDtjDPN0kGA67z/UBAQAAAAAAAAAFwjpX4NgBiClEquhLweAAAAAAAgAUAEkASQBCAFUAUwBJAE4ARQBTAFMAAQAcAEkASABNAC0AQwBBAE0ALQBFADEAMwBDADAANQAEACAAcAByAGQAaABvAHMAdABpAG4AZwAuAGwAbwBjAGEAbAADAD4ASQBIAE0ALQBDAEEATQAtAEUAMQAzAEMAMAA1AC4AcAByAGQAaABvAHMAdABpAG4AZwAuAGwAbwBjAGEAbAAFACAAcAByAGQAaABvAHMAdABpAG4AZwAuAGwAbwBjAGEAbAAHAAgAg8OiOlfg2AEAAAAAAAAAAHcAZQBiAHMAaQB0AGUAQABnAHIAaQBmAGYAaQBuAHAAcgBvAHAAZQByAHQAeQAuAGMAbwBtAC4AYQB1AEcAcgBhAG4AdABzAC0ATQBhAGMALQBtAGkAbgBpAC4AbABhAG4A
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - text/xml; charset=utf-8
+      Server:
+      - Microsoft-IIS/8.0
+      Request-Id:
+      - e3891c7c-a03a-4f1b-9ffc-76fa6ec3246d
+      X-Calculatedbetarget:
+      - ihm-cam-e13m06.prdhosting.local
+      X-Diaginfo:
+      - IHM-CAM-E13M06
+      X-Beserver:
+      - IHM-CAM-E13M06
+      X-Aspnet-Version:
+      - 4.0.30319
+      Set-Cookie:
+      - X-BackEndCookie=S-1-5-21-1370450699-4128765030-226702860-119642=u56Lnp2ejJqByJnOz8zPz8bSy8nNy9LLyZ7I0sbJzsvSysrLxsyezZ2ZyZqdgYHNz83N0s7O0s7Lq8/KxczPxc3J;
+        expires=Mon, 14-Nov-2022 05:30:26 GMT; path=/EWS; secure; HttpOnly
+      - exchangecookie=e75f6962da994f538b746f155b4c6353; expires=Sun, 15-Oct-2023
+        05:30:26 GMT; path=/; HttpOnly
+      Persistent-Auth:
+      - 'true'
+      X-Powered-By:
+      - ASP.NET
+      X-Feserver:
+      - IHM-CAM-E13C05
+      Date:
+      - Sat, 15 Oct 2022 05:30:25 GMT
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="utf-8"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Header><h:ServerVersionInfo
+        MajorVersion="15" MinorVersion="0" MajorBuildNumber="1497" MinorBuildNumber="15"
+        Version="V2_23" xmlns:h="http://schemas.microsoft.com/exchange/services/2006/types"
+        xmlns="http://schemas.microsoft.com/exchange/services/2006/types" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></s:Header><s:Body
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><m:CreateItemResponse
+        xmlns:m="http://schemas.microsoft.com/exchange/services/2006/messages" xmlns:t="http://schemas.microsoft.com/exchange/services/2006/types"><m:ResponseMessages><m:CreateItemResponseMessage
+        ResponseClass="Success"><m:ResponseCode>NoError</m:ResponseCode><m:Items/></m:CreateItemResponseMessage></m:ResponseMessages></m:CreateItemResponse></s:Body></s:Envelope>
+  recorded_at: Sat, 15 Oct 2022 05:30:26 GMT
+- request:
+    method: post
+    uri: https://graph.microsoft.com/v1.0/me/sendMail
+    body:
+      encoding: UTF-8
+      string: '{"message":{"subject":"Monopoly International listings","body":{"contentType":"HTML","content":"\u003c!DOCTYPE
+        html\u003e\n\u003chtml\u003e\n  \u003chead\u003e\n    \u003cmeta http-equiv=\"Content-Type\"
+        content=\"text/html; charset=utf-8\" /\u003e\n    \u003cstyle\u003e\n      body
+        {\n        font-size: 1.15rem;\n        font-family: ''Roboto'', ''Helvetica
+        Neue'', ''Segoe UI'', Helvetica, Arial, sans-serif;\n        line-height:
+        2em;\n        font-weight: normal;\n        font-style: normal;\n        color:
+        #333;\n\n        max-width: 36rem;\n        margin: 0 auto;\n      }\n\n      h1,
+        h2, p {\n        margin: 0;\n      }\n\n      .space-x-2 \u003e * + * {\n        margin-left:
+        1rem;\n      }\n\n      .list-none {\n        list-style: none;\n      }\n\n      .flex
+        {\n        display: flex;\n        flex-direction: row;\n        justify-content:
+        space-between;\n        align-items: center;\n      }\n\n      .flex-wrap
+        {\n        flex-wrap: wrap;\n      }\n\n      .justify-center {\n        justify-content:
+        center;\n      }\n\n      .inline-flex {\n        display: inline-flex;\n      }\n\n      .items-center
+        {\n        align-items: center;\n      }\n\n      .bg-white {\n        background-color:
+        #fff;\n      }\n\n      .rounded {\n        border-radius: 0.25rem;\n      }\n\n      .rounded-md
+        {\n        border-radius: 0.375rem;\n      }\n\n      .border {\n        border-width:
+        1px;\n        border-style: solid;\n      }\n\n      .border-gray-200 {\n        border-color:
+        #E5E7EB;\n      }\n\n      .border-transparent {\n        border-color: transparent;\n      }\n\n      .p-8
+        {\n        padding: 2rem;\n      }\n\n      .px-6 {\n        padding-left:
+        1.5rem;\n        padding-right: 1.5rem;\n      }\n\n      .py-3 {\n        padding-top:
+        .75rem;\n        padding-bottom: .75rem;\n      }\n\n      .mb-4 {\n        margin-bottom:
+        1rem;\n      }\n\n      .shadow-md {\n        box-shadow: rgba(0, 0, 0, 0)
+        0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px
+        4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px\n      }\n\n      .text-center
+        {\n        text-align: center;\n      }\n\n      .text-base {\n        font-size:
+        1rem;\n        line-height: 1.5rem;\n      }\n\n      .text-sm {\n        font-size:
+        0.875rem;\n        line-height: 1.25rem;\n      }\n\n      .text-gray-500
+        {\n        color: #6B7280;\n      }\n\n      .text-white {\n        color:
+        #fff;\n      }\n\n      .truncate {\n        white-space: nowrap;\n        overflow:
+        hidden;\n        text-overflow: ellipsis;\n      }\n\n      .no-underline
+        {\n        text-decoration: none;\n      }\n\n      .leading-snug {\n        line-height:
+        1.375em;\n      }\n\n      .font-bold {\n        font-weight: bold;\n      }\n\n      .font-medium
+        {\n        font-weight: 500;\n      }\n\n      .w-full {\n        width: 100%;\n      }\n\n      .h-auto
+        {\n        height: auto;\n      }\n\n      .bg-blue-600 {\n        background-color:
+        #2563EB;\n      }\n\n      .bg-blue-700:hover {\n        background-color:
+        #4338CA;\n      }\n    \u003c/style\u003e\n  \u003c/head\u003e\n\n  \u003cbody
+        class=\"p-8\"\u003e\n    This is the body\n\u003cdiv class=\"mb-4\"\u003e\n\n\n\u003c/div\u003e\n\n  \u003cdiv
+        class=\"bg-white border border-gray-200 rounded p-8 mb-4 shadow-md\"\u003e\n    \u003cdiv
+        class=\"flex mb-4\"\u003e\n      \u003ch2\u003eThe hippiest commercial property
+        in town\u003c/h2\u003e\n      \u003cp class=\"text-sm text-gray-500\"\u003eID:\u0026nbsp;\u003c/p\u003e\n    \u003c/div\u003e\n\n    \n    \u003cdiv
+        class=\"mb-4\"\u003e\n      \u003cdiv class=\"flex\"\u003e\n        \u003cp
+        class=\"font-bold leading-snug\"\u003e\u003c/p\u003e\n        \u003cp class=\"leading-snug\"\u003e\u003cspan
+        class=\"text-gray-500 text-sm\"\u003eTotal area:\u003c/span\u003e\u0026nbsp;\u003cspan
+        class=\"font-bold\"\u003e0 m\u003csup\u003e2\u003c/sup\u003e\u003c/span\u003e\u003c/p\u003e\n      \u003c/div\u003e\n\n    \u003c/div\u003e\n\n\n    \u003cdiv
+        class=\"mb-4\"\u003e\u003c/div\u003e\n\n  \u003c/div\u003e\n\n\u003cp class=\"text-sm
+        text-gray-500 mb-4\"\u003eYou are receiving this email because you have contacted
+        Monopoly International and you are currently searching for commercial, industrial
+        and/or retail properties.\u003c/p\u003e\n\n  \u003c/body\u003e\n\u003c/html\u003e\n"},"toRecipients":[{"emailAddress":{"address":"grant.barry@free.fr"}}],"attachments":[]}}'
+    headers:
+      User-Agent:
+      - Faraday v1.10.3
+      Authorization:
+      - Bearer
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json
+      Vary:
+      - Accept-Encoding
+      Strict-Transport-Security:
+      - max-age=31536000
+      Request-Id:
+      - 70451352-b113-4b2e-8ccd-27f4ec16ffde
+      Client-Request-Id:
+      - 70451352-b113-4b2e-8ccd-27f4ec16ffde
+      X-Ms-Ags-Diagnostic:
+      - '{"ServerInfo":{"DataCenter":"France Central","Slice":"E","Ring":"5","ScaleUnit":"000","RoleInstance":"PA1PEPF000834C9"}}'
+      Www-Authenticate:
+      - Bearer realm="", authorization_uri="https://login.microsoftonline.com/common/oauth2/authorize",
+        client_id="00000003-0000-0000-c000-000000000000"
+      Date:
+      - Fri, 03 Mar 2023 16:11:49 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '{"error":{"code":"InvalidAuthenticationToken","message":"CompactToken
+        parsing failed with error code: 80049217","innerError":{"date":"2023-03-03T16:11:49","request-id":"70451352-b113-4b2e-8ccd-27f4ec16ffde","client-request-id":"70451352-b113-4b2e-8ccd-27f4ec16ffde"}}}'
+  recorded_at: Fri, 03 Mar 2023 16:11:49 GMT
+recorded_with: VCR 6.1.0

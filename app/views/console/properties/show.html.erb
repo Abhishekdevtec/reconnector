@@ -1,0 +1,150 @@
+<%= render Console::PageHeaderComponent.new(@account.company_name) do |header_component| %>
+  <% header_component.with_tabs([
+    { title: 'Account', path: console_account_path(@account) },
+    { title: 'Agents', path: console_account_agents_path(@account) },
+    { title: 'Properties', path: console_account_properties_path(@account) },
+    { title: 'Contacts', path: console_account_contacts_path(@account) },
+    { title: 'Classifiers', path: console_account_classifiers_path(@account) }
+  ]) %>
+  <% header_component.with_buttons([
+    { title: 'Edit', path: edit_console_account_property_path(@account, @property), primary: true, icon: :edit }
+  ]) %>
+<% end %>
+
+<div class="space-y-6">
+  <%= render Console::ContainerComponent.new do %>
+    <%= render CardContainerComponent.new do %>
+      <div class="px-4 py-5 sm:px-6 flex justify-between">
+        <div>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Property Information</h3>
+          <p class="mt-1 max-w-2xl text-sm text-gray-500" title="<%= @property.created_at %>">Created <%= distance_of_time_in_words_to_now(@property.created_at) %> ago.</p>
+        </div>
+        <div class="flex flex-row flex-nowrap items-center space-x-4">
+          <div>
+            <%= render ToggleComponent.new(@property.share, title: 'Share', url: console_account_property_share_property_path(@account, @property)) %>
+          </div>
+          <% if @property.contract.present? %>
+            <%= link_to 'Display Real Commercial XML', console_account_rea_listing_path(@account, @property, format: :xml), class: 'inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500', role: 'button', target: '_blank' %>
+            <%= link_to 'Display Commercial Real Estate JSON', console_account_domain_com_au_listing_path(@account, @property, format: :json), class: 'inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500', role: 'button', target: '_blank' %>
+          <% end %>
+          <div>
+            <%= link_to console_account_property_path(@account, @property, format: :pdf), class: 'inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500', role: 'button', target: '_blank' do %>
+              <!-- Heroicon name: solid/document-text -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+              </svg>
+              Download Brochure
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+        <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+          <% @property.attributes.sort.each do |key, value| %>
+            <div class="sm:col-span-1">
+              <dt class="text-sm font-medium text-gray-500"><%= key.titleize %></dt>
+              <dd class="mt-1 text-sm text-gray-900"><%= value %></dd>
+            </div>
+          <% end %>
+
+          <div class="sm:col-span-2">
+            <dt class="text-sm font-medium text-gray-500">Images</dt>
+            <dd class="mt-1 text-sm text-gray-900">
+              <% if @property.images.any? %>
+                <div class="flex space-x-5 h-40">
+                  <% @property.images.each do |image| %>
+                    <div class="block w-full overflow-hidden rounded-lg">
+                      <%= image_tag image, class: 'rounded-lg object-cover shadow-lg' %>
+                    </div>
+                  <% end %>
+                </div>
+              <% else %>
+                <p>No images uploaded.</p>
+              <% end %>
+            </dd>
+          </div>
+
+          <div class="sm:col-span-2">
+            <dt class="text-sm font-medium text-gray-500">Files</dt>
+            <dd class="mt-1 text-sm text-gray-900">
+              <% if @property.files.any? %>
+                <div class="flex space-x-5 h-40">
+                  <% @property.files.each do |file| %>
+                    <div class="block w-full overflow-hidden rounded-lg">
+                      <p><%= file.filename %></p>
+                    </div>
+                  <% end %>
+                </div>
+              <% else %>
+                <p>No files uploaded.</p>
+              <% end %>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= render Console::ContainerComponent.new do %>
+    <%= render CardContainerComponent.new do %>
+      <div class="px-4 py-5 sm:px-6 flex justify-between">
+        <div>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Contract Information</h3>
+          <% if @property.contract? %>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500" title="<%= @property.contract.created_at %>">Created <%= distance_of_time_in_words_to_now(@property.contract.created_at) %> ago.</p>
+          <% end %>
+        </div>
+        <div>
+          <%= render ButtonComponent.new(text: 'Edit', url: edit_console_account_property_contract_path(@account, @property)) %>
+        </div>
+      </div>
+      <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+        <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+          <% if @property.contract? %>
+            <% @property.contract.attributes.sort.each do |key, value| %>
+              <div class="sm:col-span-1">
+                <dt class="text-sm font-medium text-gray-500"><%= key.titleize %></dt>
+                <dd class="mt-1 text-sm text-gray-900"><%= value %></dd>
+              </div>
+            <% end %>
+          <% end %>
+        </dl>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<p>
+  <h2>Contract</h2>
+  <% if @property.contract.present? %>
+    <%= render 'console/contracts/contract', contract: @property.contract %>
+    <%= link_to 'Edit', edit_console_account_property_contract_path(@account, @property) %>
+    <%= link_to 'Delete', console_account_property_contract_path(@account, @property), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+  <% else %>
+    Currently no contract.
+    <%= link_to 'Add contract', new_console_account_property_contract_path(@account, @property) %>
+  <% end %>
+</p>
+
+<p>
+  <h2>Property contacts</h2>
+  <% if @property.property_contacts.any? %>
+    <%= render @property.property_contacts %>
+  <% else %>
+    Currently no property contacts.
+  <% end %>
+  <%= link_to 'Add a property contact', new_console_account_property_property_contact_path(@account, @property) %>
+</p>
+
+<p>
+  <h2>Activity logs</h2>
+  <% if @property.activity_logs.any? %>
+    <%= render @property.activity_logs %>
+  <% else %>
+    No activity here...
+  <% end %>
+</p>
+
+<%= link_to 'Export to RealEstate.com.au', real_estate_au_console_account_property_path(@account, @property, format: :xml ) %> |
+<%= link_to 'Edit', [:edit, :console, @account, @property] %> |
+<%= link_to 'Back', [:console, @account, :properties] %>

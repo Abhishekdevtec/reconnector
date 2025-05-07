@@ -1,0 +1,110 @@
+<div class="grid grid-cols-6 gap-6">
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= form.label :notes, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.rich_text_area :notes, autocomplete: 'notes', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= form.label :website_url, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.text_field :website_url, autocomplete: 'website-url', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= form.label :headline, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.text_field :headline, autocomplete: 'headline', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= form.label :grabline, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.text_field :grabline, autocomplete: 'grabline', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= form.label :keywords, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.text_field :keywords, autocomplete: 'keywords', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= form.label :brochure_description, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.rich_text_area :brochure_description, autocomplete: 'brochure-description', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= form.label :website_description, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.rich_text_area :website_description, autocomplete: 'website-description', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= form.label :zoning, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.text_field :zoning, autocomplete: 'zoning', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= form.label :local_council, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.text_field :local_council, autocomplete: 'local-council', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-2">
+    <%= form.label :parking_spaces, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.number_field :parking_spaces, min: 0, autocomplete: 'parking-spaces', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-4">
+    <%= form.label :parking_comments, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.text_field :parking_comments, autocomplete: 'parking-comments', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= form.label :lifts_escalators_travelators, class: 'block text-sm font-medium text-gray-700' do %>
+      Lifts/Escalators/Travelators
+    <% end %>
+    <%= form.text_field :lifts_escalators_travelators, autocomplete: 'lifts-escalators-travelators', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= form.label :disability_access, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.text_field :disability_access, autocomplete: 'disability-access', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= form.label :rating, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.text_field :rating, autocomplete: 'rating', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= form.label :fit_out, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.rich_text_area :fit_out, autocomplete: 'fit-out', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= form.label :furniture, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.rich_text_area :furniture, autocomplete: 'furniture', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-2">
+    <%= form.label :min_clearance_height, class: 'block text-sm font-medium text-gray-700' %>
+    <%= render FormNumberFieldComponent.new(form: form, name: :min_clearance_height, step: 0.01, min: 0) %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-2">
+    <%= form.label :max_clearance_height, class: 'block text-sm font-medium text-gray-700' %>
+    <%= render FormNumberFieldComponent.new(form: form, name: :max_clearance_height, step: 0.01, min: 0) %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-4">
+    <%= form.label :clear_span_columns, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.text_field :clear_span_columns, autocomplete: 'cleaspan-columns', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= form.label :crane, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.text_field :crane, autocomplete: 'parking-comments', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= form.label :entrances_roller_doors_container_access, class: 'block text-sm font-medium text-gray-700' %>
+    <%= form.text_field :entrances_roller_doors_container_access, autocomplete: 'entrances-roller-doors-container-access', class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+  </div>
+
+</div>

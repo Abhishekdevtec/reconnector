@@ -1,0 +1,19 @@
+<tr class="<%= cycle('bg-white', 'bg-gray-50') -%>">
+  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+     <%= check_box_tag 'prospect_ids[]', prospect.id, false, { data: { table_checkbox_toggle_target: 'checkbox' }, class: 'focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded' } %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+    <%= prospect.first_name %> <%= prospect.last_name %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+    <%= prospect.email %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+    <% if prospect.business&.any? %>
+      <%= prospect.business&.company_name %>
+    <% end %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+    <%= I18n.l(prospect.emailed_at, format: :short) if prospect.emailed_at.present? %>
+  </td>
+</tr>

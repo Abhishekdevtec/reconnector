@@ -1,0 +1,28 @@
+# one:
+#   record: name_of_fixture (ClassOfFixture)
+#   name: content
+#   body: <p>In a <i>million</i> stars!</p>
+property_brochure_description:
+  record: with_kitchen_sink (Property)
+  name: brochure_description
+  body: <p>This is the description that is used in the <strong>brochure</strong>.</p>
+
+property_website_description:
+  record: with_kitchen_sink (Property)
+  name: website_description
+  body: <p>This is the description that is used in the <strong>website</strong>.</p>
+
+property_furniture:
+  record: with_kitchen_sink (Property)
+  name: furniture
+  body: <p>This is the furniture rich text</p>
+
+property_fitout:
+  record: with_kitchen_sink (Property)
+  name: fitout
+  body: <p>This is the fitout rich text</p>
+
+property_notes:
+  record: with_kitchen_sink (Property)
+  name: notes
+  body: <p>In a <i>million</i> notes!</p>

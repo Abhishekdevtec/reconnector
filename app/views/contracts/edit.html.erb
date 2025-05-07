@@ -1,0 +1,8 @@
+<% content_for :page_title do %>Edit contract | Reconnector.app<% end %>
+
+<%= render Page::HeaderComponent.new('Edit contract') %>
+
+
+<div class="pb-8">
+  <%= render('form', contract: @contract) if @contract %>
+</div>

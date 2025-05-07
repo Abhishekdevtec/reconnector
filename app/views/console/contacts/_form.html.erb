@@ -1,0 +1,106 @@
+<%= form_with(model: [:console, @account, contact]) do |form| %>
+  <% if contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+        <% contact.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.select :type, ['Business', 'Individual'].collect { |p| [p, p] } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :agent_id %>
+    <%= form.collection_select :agent_id, @account.agents.all, :id, :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :account_id %>
+    <%= form.collection_select :account_id, Account.all.order(:company_name), :id, :company_name %>
+  </div>
+
+  <div class="field">
+    <%= form.collection_check_boxes(:classifications, @account.classifiers, :name, :name, { include_hidden: false }) do |b| %>
+      <%= b.check_box class: 'focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded' %>
+      <%= b.label class: 'font-medium text-gray-700' do %>
+        <%= b.text.humanize %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :share %>
+    <%= form.check_box :share %>
+  </div>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :business_name %>
+    <%= form.text_field :business_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :legal_name %>
+    <%= form.text_field :legal_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :job_title %>
+    <%= form.text_field :job_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mobile %>
+    <%= form.text_field :mobile %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fax %>
+    <%= form.text_field :fax %>
+  </div>
+
+  <div class="field">
+    <%= form.label :url %>
+    <%= form.text_field :url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :registration %>
+    <%= form.text_field :registration %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.rich_text_area :notes %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

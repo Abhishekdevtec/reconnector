@@ -1,0 +1,42 @@
+<div class="sm:col-span-6">
+
+  <div class="sm:col-span-3">
+    <%= addresses_form.label :category %>
+    <%= addresses_form.select(:category, options_for_select(Address.categories.keys.map { |key| [key.humanize, key] }), { }, { class: 'mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm' }) %>
+  </div>
+
+  <div class="sm:col-span-4">
+    <%= render FormLabelComponent.new(form: addresses_form, name: :line_1) %>
+    <%= render FormTextFieldComponent.new(form: addresses_form, name: :line_1) %>
+  </div>
+  <div class="sm:col-span-4">
+    <%= render FormLabelComponent.new(form: addresses_form, name: :line_2) %>
+    <%= render FormTextFieldComponent.new(form: addresses_form, name: :line_2) %>
+  </div>
+  <div class="sm:col-span-4">
+    <%= render FormLabelComponent.new(form: addresses_form, name: :line_3) %>
+    <%= render FormTextFieldComponent.new(form: addresses_form, name: :line_3) %>
+  </div>
+
+  <div class="sm:col-span-4">
+    <%= render FormLabelComponent.new(form: addresses_form, name: :Suburb) %>
+    <%= render FormTextFieldComponent.new(form: addresses_form, name: :city) %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-3">
+    <%= render FormLabelComponent.new(form: addresses_form, name: :postal_code) %>
+    <%= render FormTextFieldComponent.new(form: addresses_form, name: :postal_code) %>
+  </div>
+
+  <div class="grid grid-cols-6 gap-6">
+    <div class="col-span-6 sm:col-span-3">
+      <%= render FormLabelComponent.new(form: addresses_form, name: :state) %>
+      <%= render FormCollectionSelectComponent.new(form: addresses_form, name: :state, collection: State.all.order(:name), attribute: :name, component_options: { include_blank: 'Select a value' }) %>
+    </div>
+
+    <div class="col-span-6 sm:col-span-3">
+      <%= render FormLabelComponent.new(form: addresses_form, name: :country, title: 'Country / Region') %>
+      <%= render FormCollectionSelectComponent.new(form: addresses_form, name: :country, collection: Country.all.order(:name), attribute: :name, component_options: { include_blank: 'Select a value' }) %>
+    </div>
+  </div>
+</div>

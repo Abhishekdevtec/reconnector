@@ -1,0 +1,83 @@
+<% if @contact&.first_name&.present? %>
+  <p class="mb-4">Hello <%= @contact.first_name %>,</p>
+<% else %>
+  <p class="mb-4">Hello,</p>
+<% end %>
+<% @property = @property.first %>
+<p class="mb-4">I have a new <%= @property.type_label.downcase %> listing that you may be looking for.</p>
+
+<p class="mb-4">Let me know if you are interested.</p>
+
+<p class="mb-4"><%= "#{%i[Kind Best].sample} regards," %></p>
+
+<div class="mb-4">
+   
+    <p><%= @property.agent.name %></p>
+
+    <% if @property.agent.mobile.present? %>
+      <p class="block text-sm">Mobile: <%= @property.agent.mobile %></p>
+    <% else %>
+      <p class="block text-sm">Mobile: Not available</p>
+    <% end %>
+
+    <% if @property.agent.phone.present? %>
+      <p class="block text-sm">Phone: <%= @property.agent.phone %></p>
+    <% else %>
+      <p class="block text-sm">Phone: Not available</p>
+    <% end %>
+
+    <% if @property.agent.fax.present? %>
+      <p class="block text-sm">Fax: <%= @property.agent.fax %></p>
+    <% else %>
+      <p class="block text-sm">Fax: Not available</p>
+    <% end %>
+</div>
+
+<div class="bg-white border border-gray-200 rounded p-8 mb-4 shadow-md">
+  <div class="flex mb-4">
+    <h2 class="text-lg font-semibold"><%= @property.name %></h2>
+    <p class="text-sm text-gray-500">ID:&nbsp;<%= @property.internal_id %></p>
+  </div>
+
+  <% if @property.images.attached? %>
+    <%= image_tag @property.images.first, class: 'w-full h-auto mb-4' %>
+  <% else %>
+    <p class="text-sm text-gray-500 mb-4">No images available for this property.</p>
+  <% end %>
+  
+  <div class="mb-4">
+    <div class="flex items-center">
+      <p class="font-bold leading-snug"><%= @property.city_and_state %></p>
+      <p class="leading-snug"><span class="text-gray-500 text-sm">Total area:</span>&nbsp;<span class="font-bold"><%= @property.building_area.to_i %> m<sup>2</sup></span></p>
+    </div>
+
+    <% if @property.contract.present? %>
+      <div class="flex space-x-4">
+        <% if @property.contract.for_sale? %>
+          <% if @property.contract.sale_actual_sale_price.positive? %>
+            <p class="leading-snug"><span class="text-gray-500 text-sm">For sale:</span>&nbsp;<span class="font-bold"><%= number_to_currency(@property.contract.sale_actual_sale_price, locale: :'en-AU') %></span></p>
+          <% else %>
+            <p class="font-bold leading-snug">For sale</p>
+          <% end %>
+        <% end %>
+
+        <% if @property.contract.for_lease? %>
+          <% if @property.contract.lease_total_net_rent&.positive? %>
+            <p class="leading-snug"><span class="text-gray-500 text-sm">For lease:</span>&nbsp;<span class="font-bold"><%= number_to_currency(@property.contract.lease_total_net_rent, locale: :'en-AU') %></span></p>
+          <% else %>
+            <p class="font-bold leading-snug">For lease</p>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="p-8 flex justify-center">
+    <%= link_to 'View details in your browser', @property.website_link, class: 'truncate inline-flex items-center px-6 py-3 border border-transparent text-base no-underline font-medium rounded-md shadow-sm text-white bg-blue-600' %>
+  </div>
+
+  <div class="mb-4"><%= @property.brochure_description %></div>
+</div>
+
+
+<p class="text-sm text-gray-500 mb-4">You are receiving this email because you have contacted <%= @property.account.company_name %> and you are currently searching for commercial, industrial and/or retail properties.</p>

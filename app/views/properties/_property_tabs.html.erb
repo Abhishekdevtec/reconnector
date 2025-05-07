@@ -1,0 +1,22 @@
+<% if property.archived? %>
+  <%= render TabContainerComponent.new do |c| %>
+    <%= c.with_tab(name: 'Details',       url: property, active: current_property_tab?(:details)) %>
+    <%= c.with_tab(name: 'Contacts',      url: property_property_contacts_url(property), active: current_property_tab?(:property_contacts)) %>
+    <%= c.with_tab(name: 'Activity logs', url: property_property_activity_logs_url(property), active: current_property_tab?(:property_activity_logs)) %>
+  <% end %>
+<% elsif !PropertiesPolicy.edit?(property, Current.agent) %>
+  <%= render TabContainerComponent.new do |c| %>
+    <%= c.with_tab(name: 'Details',         url: property, active: current_property_tab?(:details)) %>
+    <%= c.with_tab(name: 'Contract',        url: property_contract_url(property), active: current_property_tab?(:contract)) %>
+  <% end %>
+<% else %>
+  <%= render TabContainerComponent.new do |c| %>
+    <%= c.with_tab(name: 'Details',         url: property, active: current_property_tab?(:details)) %>
+    <%= c.with_tab(name: 'Contract',        url: property_contract_url(property), active: current_property_tab?(:contract)) %>
+    <%= c.with_tab(name: 'Prospects',       url: property_property_prospects_url(property), active: current_property_tab?(:property_prospects)) %>
+    <%= c.with_tab(name: 'Email prospects', url: new_property_prospects_properties_email_path(property), active: current_property_tab?(:email_property_prospects)) %>
+    <%= c.with_tab(name: 'Contacts',        url: property_property_contacts_url(property), active: current_property_tab?(:property_contacts)) %>
+    <%= c.with_tab(name: 'Enquiries',       url: property_listing_enquiries_path(property), active: current_property_tab?(:property_listing_enquiries)) if @property.listing_enquiries.any? %>
+    <%= c.with_tab(name: 'Activity logs',   url: property_property_activity_logs_url(property), active: current_property_tab?(:property_activity_logs)) %>
+  <% end %>
+<% end %>

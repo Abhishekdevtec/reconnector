@@ -1,0 +1,51 @@
+<%= render Page::HeaderComponent.new('Change your password') %>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'w-full' }) do |f| %>
+  <div class="space-y-8 divide-y divide-gray-200 py-8">
+    <div>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+        <div class="sm:col-span-2">
+          <%= render FormLabelComponent.new(form: f, name: :current_password) %>
+          <%= render FormTextFieldComponent.new(form: f, name: :current_password, type: :password, autocomplete: 'current-password') %>
+          <% if resource.errors[:current_password].present? %>
+            <div class="text-sm text-red-600 mt-1"><%= resource.errors[:current_password].first %></div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+        <div class="sm:col-span-2">
+          <%= render FormLabelComponent.new(form: f, name: :password) %>
+          <%= render FormTextFieldComponent.new(form: f, name: :password, type: :password, autocomplete: 'new-password') %>
+          <% if resource.errors[:password].present? %>
+            <div class="text-sm text-red-600 mt-1"><%= resource.errors[:password].first %></div>
+          <% end %>
+          <% if @minimum_password_length %>
+            <em><%= @minimum_password_length %> characters minimum</em>
+          <% end %>
+        </div>
+      </div>
+
+
+      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+        <div class="sm:col-span-2">
+          <%= render FormLabelComponent.new(form: f, name: :password_confirmation) %>
+          <%= render FormTextFieldComponent.new(form: f, name: :password_confirmation, type: :password, autocomplete: 'current-password') %>
+          <% if resource.errors[:password_confirmation].present? %>
+            <div class="text-sm text-red-600 mt-1"><%= resource.errors[:password_confirmation].first %></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-end pt-6">
+      <%= link_to 'Cancel', :back, class: 'bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+      <%= f.submit 'Update', class: 'ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+    </div>
+  <% end %>
+
+</div>

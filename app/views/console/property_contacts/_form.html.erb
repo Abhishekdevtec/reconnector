@@ -1,0 +1,36 @@
+<%= form_with(model: property_contact, url: console_account_property_property_contacts_path(@account, @property, property_contact)) do |form| %>
+  <% if property_contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(property_contact.errors.count, "error") %> prohibited this property_contact from being saved:</h2>
+
+      <ul>
+        <% property_contact.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :property_id %>
+    <%= form.text_field :property_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contact_id %>
+    <%= form.collection_select :contact_id, @account.contacts.all, :id, :name %>
+  </div>
+
+  <div class="field">
+    <%= form.collection_check_boxes(:classifications, @account.classifiers, :name, :name, { include_hidden: false }) do |b| %>
+      <%= b.check_box class: 'focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded' %>
+      <%= b.label class: 'font-medium text-gray-700' do %>
+        <%= b.text.humanize %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

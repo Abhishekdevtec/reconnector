@@ -1,0 +1,162 @@
+<%= form_with(model: contract, url: console_account_property_contract_path(@account, @property)) do |form| %>
+  <% if contract.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contract.errors.count, "error") %> prohibited this contract from being saved:</h2>
+
+      <ul>
+        <% contract.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :property_id %>
+    <%= form.text_field :property_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :for_sale %>
+    <%= form.check_box :for_sale %>
+  </div>
+
+  <div class="field">
+    <%= form.label :for_lease %>
+    <%= form.check_box :for_lease %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sale_price_cents %>
+    <%= form.number_field :sale_price_cents %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sale_price_from_cents %>
+    <%= form.number_field :sale_price_from_cents %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sale_price_to_cents %>
+    <%= form.number_field :sale_price_to_cents %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sale_auction_venue %>
+    <%= form.text_field :sale_auction_venue %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sale_inspection_on %>
+    <%= form.date_select :sale_inspection_on, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sale_reserve_price_cents %>
+    <%= form.number_field :sale_reserve_price_cents %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sale_actual_sale_price_cents %>
+    <%= form.number_field :sale_actual_sale_price_cents %>
+  </div>
+
+  <div class="field">
+    <%= form.label :private_treaty_minimum_price_cents %>
+    <%= form.number_field :private_treaty_minimum_price_cents %>
+  </div>
+
+  <div class="field">
+    <%= form.label :private_treaty_target_price_cents %>
+    <%= form.number_field :private_treaty_target_price_cents %>
+  </div>
+
+  <div class="field">
+    <%= form.label :eoi_close_on %>
+    <%= form.date_select :eoi_close_on, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :eoi_inspection_on %>
+    <%= form.date_select :eoi_inspection_on, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :eoi_minimum_price_cents %>
+    <%= form.number_field :eoi_minimum_price_cents %>
+  </div>
+
+  <div class="field">
+    <%= form.label :eoi_target_price_cents %>
+    <%= form.number_field :eoi_target_price_cents %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lease_net_rent %>
+    <%= form.number_field :lease_net_rent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lease_outgoings %>
+    <%= form.number_field :lease_outgoings %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lease_gross_rent %>
+    <%= form.number_field :lease_gross_rent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lease_cleaning_cents %>
+    <%= form.number_field :lease_cleaning_cents %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lease_covered_parking_space_cents %>
+    <%= form.number_field :lease_covered_parking_space_cents %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lease_on_grade_parking_space_cents %>
+    <%= form.number_field :lease_on_grade_parking_space_cents %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lease_other_rental_costs_cents %>
+    <%= form.number_field :lease_other_rental_costs_cents %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lease_commencement_on %>
+    <%= form.date_select :lease_commencement_on, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lease_expires_on %>
+    <%= form.date_select :lease_expires_on, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lease_term %>
+    <%= form.text_field :lease_term %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lease_rent_review_on %>
+    <%= form.date_select :lease_rent_review_on, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lease_escalation_rate %>
+    <%= form.text_area :lease_escalation_rate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lease_escalation_formulae %>
+    <%= form.text_field :lease_escalation_formulae %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

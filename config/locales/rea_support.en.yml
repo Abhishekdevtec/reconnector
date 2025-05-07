@@ -1,0 +1,10 @@
+# rea localization support
+en:
+  activerecord:
+    attributes:
+      account:
+        rea_client_id: Client ID
+        rea_encrypted_client_secret: Encrypted client secret
+        rea_client_secret: Client secret
+        rea_party_id: Party ID
+

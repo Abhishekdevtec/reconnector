@@ -1,0 +1,123 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+en:
+  activerecord:
+    attributes:
+      access_request:
+        company: Company name
+        agent_count: How many agents do you have in your company?
+      account:
+        griffin_property_com_au_api_token: Website API Token
+        griffin_property_destination_folder: Destination Folder
+        griffin_property_password: Password
+        griffin_property_host_url: URL
+        griffin_property_username: Username
+      agent:
+        rea_agent_id: REA Agent ID
+        domain_com_au_agent_id: Domain.com.au Agent ID
+        roles:
+          agent: Agent
+          admin: Admin
+          account_manager: Account Manager
+      contact:
+        url: URL
+      contract:
+        lease_net_rent: Lease net rent / sqm.
+        lease_outgoings: Lease outgoings / sqm.
+        lease_gross_rent: Lease gross rent / sqm.
+        lease_cleaning: Lease cleaning / sqm.
+      property:
+        website_url: Website URL
+        usages:
+          one: Usages
+          other: "%{count} usages"
+          acreage: Acreage
+          apartment: Apartment
+          development: Development
+          farming: Farming
+          flat: Flat
+          hotel: Hotel/Leisure
+          house: House
+          land_development: Land/Development
+          land: Land
+          medical: Medical/Consulting
+          offices: Offices
+          other: Other
+          retail_store: Retail
+          retirement: Retirement
+          rural: Rural
+          service_apartment: Serviced Apartment
+          showrooms: Showrooms/Bulky Goods
+          studio: Studio
+          townhouse: Townhouse
+          unit: Unit
+          villa: Villa
+          warehouse: Industrial/Warehouse
+        listing_enquiries:
+          property_portal:
+            domain_com_au: Domain.com.au
+            realestate_com_au: realestate.com.au
+    errors:
+      models:
+        property:
+          attributes:
+            usages:
+              # acreage/apartment/development/farming/flat/hotel/house/land_development/land/medical/offices/other/retail_store/retirement/rural/service_apartment/showrooms/studio/townhouse/unit/villa/warehouse:
+              #   too_long: "You can only select 3 usages"
+              # too_long: "You can only select 3 usages"
+  accounts:
+    agents:
+      create:
+        success: Agent was successfully created.
+      update:
+        success: Agent was successfully updated.
+  contacts:
+    individuals:
+      form:
+        save: Save
+    businesses:
+      form: 
+        save: Save
+  dashboards:
+    good_morning: Good morning %{name}
+    good_afternoon: Good afternoon %{name}
+    good_evening: Good evening %{name}
+    greeting: Hello %{name}
+  properties:
+    form:
+      save: Save
+    prospects_properties_emails:
+      create:
+        success:
+          zero: No emails sent.
+          one: 1 Email sent.
+          other: "%{count} Emails sent"

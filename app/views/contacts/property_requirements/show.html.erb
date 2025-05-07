@@ -1,0 +1,11 @@
+<% content_for :page_title do %><%= @contact.name %> | Property requirements | Reconnector.app<% end %>
+
+<%= render Page::HeaderComponent.new("#{@contact.name} property requirements") do %>
+  <%= render ButtonComponent.new(text: 'Back', url: @contact) %>
+  <%= render DeleteButtonComponent.new(text: 'Delete this property requirement', url: contact_property_requirement_path(@contact, @property_requirement)) %>
+<% end %>
+
+
+<div class="pb-8 space-y-6 w-full">
+  <%= render partial: 'contacts/shared/email_property_requirements', locals: { property_requirements: [@property_requirement] } %>
+</div>

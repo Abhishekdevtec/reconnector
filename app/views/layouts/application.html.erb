@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= meta_title %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'tailwind', 'inter-font', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-gray-50">
+    <div class="min-h-full">
+      <% unless devise_controller? %>
+        <%= render 'shared/navbar' %>
+      <% end %>
+      <%= yield :page_heading if content_for? :page_heading %>
+      <%= render 'shared/page_tabs' if content_for? :page_tabs %>
+
+      <main class="bg-gray-50 pb-8">
+        <%= render Page::ContainerComponent.new do %>
+          <%= yield %>
+        <% end %>
+      </main>
+      <%= render 'shared/flash_toast' if flash && flash.any? %>
+    </div>
+  </body>
+</html>

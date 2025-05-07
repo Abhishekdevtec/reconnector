@@ -1,0 +1,29 @@
+<%= render 'console/shared/account_page_header' %>
+
+<div class="space-y-8">
+  <%= render Console::ContainerComponent.new do %>
+    <%= render CardContainerComponent.new do %>
+      <div class="px-4 py-5 sm:px-6 flex justify-between">
+        <div>
+          <div class="flex flex-row space-x-2">
+            <h3 class="text-lg font-medium leading-6 text-gray-900">Inbound webhook</h3>
+          </div>
+          <p class="mt-1 max-w-2xl text-sm text-gray-500" title="<%= @inbound_webhook.created_at %>">Created <%= distance_of_time_in_words_to_now(@inbound_webhook.created_at) %> ago.</p>
+        </div>
+        <div>
+          <%= link_to 'Replay', [:replay, :console, @account, @inbound_webhook], class: 'inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2' %>
+        </div>
+      </div>
+      <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+        <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+          <% @inbound_webhook.attributes.sort.each do |key, value| %>
+            <div class="sm:col-span-1">
+              <dt class="text-sm font-medium text-gray-500"><%= key %></dt>
+              <dd class="mt-1 text-sm text-gray-900"><%= value %></dd>
+            </div>
+          <% end %>
+        </dl>
+      </div>
+    <% end %>
+  <% end %>
+</div>

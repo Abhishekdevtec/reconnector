@@ -1,0 +1,7 @@
+<section class="pdf-flex pdf-justify-between w-full max-h-80 overflow-hidden">
+  <%= image_tag embed_image(images.first.variant(resize_to_fill: [640, 320]).processed), class: 'w-2/3' %>
+  <div class="pdf-flex pdf-flex-col pdf-grow">
+    <%= image_tag embed_image(images.second.variant(resize_to_fill: [320, 160]).processed), class: 'max-h-40' %>
+    <%= image_tag embed_image(images.third.variant(resize_to_fill: [320, 160]).processed), class: 'max-h-40' %>
+  </div>
+</section>

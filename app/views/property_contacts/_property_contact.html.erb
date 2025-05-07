@@ -1,0 +1,9 @@
+<div>
+  <%= link_to property_contact.contact.name, property_contact.contact %>
+  <% if property_contact.classifications.any? %>
+    <% property_contact.classifications.each do |classification| %>
+      <%= classification.name %>
+    <% end %>
+  <% end %>
+  <%= link_to 'Delete', property_property_contact_path(@property, property_contact), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+</div>

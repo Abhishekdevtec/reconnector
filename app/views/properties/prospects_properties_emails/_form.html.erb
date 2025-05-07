@@ -1,0 +1,125 @@
+<%= render ErrorComponent.new(prospects_properties_email.errors) if prospects_properties_email.errors.any? %>
+
+<div class="space-y-6 w-full">
+  <%= form_with model: prospects_properties_email, url: property_prospects_properties_emails_path(property) do |form| %>
+
+    <%= render Forms::ContainerComponent.new do %>
+      <%= render Forms::SectionComponent.new do %>
+        <%= render Forms::GridComponent.new do %>
+
+          <div class="sm:col-span-6">
+            <div class="border-l-4 border-yellow-400 bg-yellow-50 p-4">
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <!-- Heroicon name: mini/exclamation-triangle -->
+                  <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M8.485 3.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 3.495zM10 6a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 6zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <p class="text-sm text-yellow-700">
+                    'Hello <em>contact name</em>,' will automatically be added before the email body.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sm:col-span-6">
+            <%= form.label :body, class: 'block text-sm font-medium text-gray-700' %>
+            <%= form.rich_text_area :body, rows: 80, class: 'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md' %>
+          </div>
+
+          <div class="sm:col-span-6 space-y-4 mb-4">
+
+            <div class="text-base font-medium text-gray-900" aria-hidden="true">Attachments</div>
+
+            <div class="relative flex items-start">
+              <div class="flex h-5 items-center">
+                <%= form.check_box :attach_brochures, class: 'h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500' %>
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="brochure" class="font-medium text-gray-700">Attach brochures</label>
+                <span id="attach-brochure" class="text-gray-500"><span class="sr-only">Attach brochure </span>so that prospects can see the property details offline.</span>
+              </div>
+            </div>
+
+            <label for="cover-photo" class="block text-sm font-medium text-gray-700">Additional files</label>
+            <div class="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+              <div class="space-y-1 text-center">
+                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                  <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <div class="flex text-sm text-gray-600">
+                  <%= form.label :files, class: 'relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500' do %>
+                    <span>Upload one or more files</span>
+                    <%= form.file_field :files, multiple: true, class: 'sr-only' %>
+                  <% end %>
+                  <p class="pl-1">or drag and drop</p>
+                </div>
+                <p class="text-xs text-gray-500">Any files up to 10MB</p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <div class="text-base font-medium text-gray-900" aria-hidden="true">Select the properties</div>
+      <%= render Forms::SectionComponent.new do %>
+        <div class="mt-8 flex flex-col">
+          <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+              <div class="relative overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+                <%= tag.table data: { controller: :'table-checkbox-toggle' }, class: 'min-w-full table-fixed divide-y divide-gray-300' do %>
+                  <thead class="bg-gray-100">
+                    <tr>
+                      <th scope="col" class="relative w-12 px-6 sm:w-16 sm:px-8">
+                        <%= tag.input data: { action: 'table-checkbox-toggle#toggle' }, type: :checkbox, class: 'absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 sm:left-6' %>
+                      </th>
+                      <th scope="col" class="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">Name</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Business</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email sent</th>
+                    </tr>
+                  </thead>
+                  <% if property.prospects.present? %>
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                      <% property.prospects.each do |prospect| %>
+                        <tr class="<%= cycle('bg-white', 'bg-gray-50') -%>">
+                          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            <%= check_box_tag 'contact_ids[]', prospect.id, false, { data: { table_checkbox_toggle_target: 'checkbox' }, class: 'focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded' } %>
+                          </td>
+                          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            <%= prospect.first_name %> <%= prospect.last_name %>
+                          </td>
+                          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                            <%= prospect.email %>
+                          </td>
+                          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                            <% if prospect.business&.any? %>
+                              <%= prospect.business&.company_name %>
+                            <% end %>
+                          </td>
+                          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            <%= I18n.l(prospects_properties_email.sent_at, format: :short) if prospects_properties_email.sent_at.present? %>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <!-- Action buttons -->
+      <%= render Forms::SectionComponent.new do %>
+        <div class="flex justify-end space-x-4 mt-6">
+          <%= render ButtonComponent.new(text: 'Back', url: @contact) %>
+          <%= render SubmitButtonComponent.new(text: 'Send email', icon: :email) %>
+        </div>
+      <% end %>
+
+    <% end %>
+  <% end %>
+</div>

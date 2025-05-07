@@ -1,0 +1,68 @@
+<%= render Console::ContainerComponent.new do %>
+  <%= render CardContainerComponent.new do %>
+    <div class="px-4 py-5 sm:px-6 flex justify-between">
+      <div>
+        <div class="flex flex-row space-x-2">
+          <h3 class="text-lg font-medium leading-6 text-gray-900"><%= @contact.name %></h3>
+        </div>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500" title="<%= @contact.created_at %>">Created <%= distance_of_time_in_words_to_now(@account.created_at) %> ago.</p>
+      </div>
+      <div>
+        <%= link_to [:edit, :console, @account, @contact], class: 'inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2' do %>
+          <!-- Heroicon name: mini/pencil -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="-ml-1 mr-2 h-5 w-5">
+            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z" />
+          </svg>
+          Edit
+        <% end %>
+      </div>
+    </div>
+    <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+      <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+        <% @contact.attributes.sort.each do |key, value| %>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500"><%= key %></dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= value %></dd>
+          </div>
+        <% end %>
+      </dl>
+    </div>
+  <% end %>
+<% end %>
+
+<p>
+  <h2>Addresses</h2>
+  <% if @contact.addresses.any? %>
+    <%= render partial: 'console/addresses/address', collection: @contact.addresses %>
+  <% else %>
+    No addresses
+  <% end %>
+</p>
+
+<p>
+  <h2>Classifications</h2>
+  <% if @contact.classifications.any? %>
+    <%= render partial: 'console/classifications/classification', collection: @contact.classifications %>
+  <% else %>
+    No classifications
+  <% end %>
+</p>
+
+<p>
+  <h2>PropertyContacts</h2>
+  <% if @contact.property_contacts.any? %>
+    <% @contact.property_contacts.each do |property_contact| %>
+      <div>
+        <% property_contact.classifications.each do |classification| %>
+          <%= classification.name %>
+        <% end %>
+        <%= link_to "view property", [:console, @account, property_contact.property] %>
+      </div>
+    <% end %>
+  <% else %>
+    No property_contacts
+  <% end %>
+</p>
+
+<%= link_to 'Edit', [:edit, :console, @account, @contact] %> |
+<%= link_to 'Back', console_account_contacts_path(@account) %>

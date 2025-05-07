@@ -1,0 +1,9 @@
+# domain_com_au localization support
+en:
+  activerecord:
+    attributes:
+      account:
+        azure_application_id: Azure Application (client) ID
+        azure_tenant_id: Directory (tenant) ID
+      contact:
+        synchronize_with_office_online: Synchronize

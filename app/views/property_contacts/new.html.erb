@@ -1,0 +1,12 @@
+<% content_for :page_title do %>New property contact | Reconnector.app<% end %>
+
+<%= render Page::HeaderComponent.new('New property contact') %>
+
+<div class="w-full pt-6">
+  <%= render 'contact_filter' %>
+  <%= turbo_frame_tag 'results' do %>
+    <%= render partial: 'form', locals: { property_contact: @property_contact, contacts: @contacts } %>
+  <% end %>
+</div>
+
+

@@ -1,0 +1,4 @@
+<%= render Page::HeaderComponent.new(object.name) do %>
+  <%= edit_contact_button(object) %>
+  <%= render DeleteButtonComponent.new(text: 'Delete', url: object) %>
+<% end %>

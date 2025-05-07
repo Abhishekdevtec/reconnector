@@ -1,0 +1,246 @@
+<%= render 'console/shared/account_page_header' %>
+
+<div class="space-y-8 py-8">
+  <%= render Console::ContainerComponent.new do %>
+    <%= render CardContainerComponent.new do %>
+      <div class="px-4 py-5 sm:px-6 flex justify-between">
+        <div>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Account Information</h3>
+          <p class="mt-1 max-w-2xl text-sm text-gray-500" title="<%= @account.created_at %>">Created <%= distance_of_time_in_words_to_now(@account.created_at) %> ago.</p>
+        </div>
+      </div>
+      <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+        <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Company name</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @account.company_name %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Legal name</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @account.company_name %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Email address</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @account.email %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Phone</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @account.phone %></dd>
+          </div>
+          <div class="sm:col-span-2">
+            <dt class="text-sm font-medium text-gray-500">Domain name</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @account.domain_name %></dd>
+          </div>
+          <div class="sm:col-span-2">
+            <dt class="text-sm font-medium text-gray-500">Fax</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @account.fax %></dd>
+          </div>
+        </dl>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= render Console::ContainerComponent.new do %>
+    <%= render CardContainerComponent.new do %>
+      <div class="px-4 py-5 sm:px-6 flex justify-between">
+        <div>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Brochure settings</h3>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+        <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Primary color</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @account.primary_color %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Secondary color</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @account.secondary_color %></dd>
+          </div>
+          <div class="sm:col-span-2">
+            <dt class="text-sm font-medium text-gray-500">Brochure disclaimer</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @account.brochure_disclaimer %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">PDF Brochure logo</dt>
+            <dd class="mt-1 text-sm text-gray-900 bg-gray-200 shrink">
+              <% if @account.pdf_logo.present? %>
+                <% if @account.pdf_logo.blob.content_type == 'image/svg+xml' %>
+                  <%= @account.pdf_logo_as_svg %>
+                <% else %>
+                  <%= image_tag(@account.pdf_logo, class: 'h-20') %>
+                <% end %>
+              <% end %>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= render Console::ContainerComponent.new do %>
+    <%= render CardContainerComponent.new do %>
+      <div class="px-4 py-5 sm:px-6 flex justify-between">
+        <div>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Real Estate Portal settings</h3>
+        </div>
+      </div>
+      <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+        <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">REA Party ID</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @account.rea_party_id || 'N/A' %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">REA Account ID</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @account.rea_client_id || 'N/A' %></dd>
+          </div>
+          <div class="sm:col-span-2">
+            <dt class="text-sm font-medium text-gray-500">REA Client secret</dt>
+            <% if @account.rea_encrypted_client_secret.blank? %>
+              <%= render BadgeComponent.new(text: 'missing', color: :red) %>
+            <% else %>
+              <%= render BadgeComponent.new(text: 'present', color: :green) %>
+            <% end %>
+          </div>
+        </dl>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= render Console::ContainerComponent.new do %>
+    <%= render CardContainerComponent.new do %>
+      <div class="px-4 py-5 sm:px-6 flex justify-between">
+        <div>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Domain portal settings</h3>
+        </div>
+      </div>
+      <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+        <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Domain client ID</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @account.domain_com_au_client_id %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Domain client secret</dt>
+            <% if @account.domain_com_au_encrypted_client_secret.blank? %>
+              <%= render BadgeComponent.new(text: 'missing', color: :red) %>
+            <% else %>
+              <%= render BadgeComponent.new(text: 'present', color: :green) %>
+            <% end %>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Domain authorization code</dt>
+            <% if @account.domain_com_au_encrypted_authorization_code.blank? %>
+              <%= render BadgeComponent.new(text: 'missing', color: :red) %>
+            <% else %>
+              <%= render BadgeComponent.new(text: 'present', color: :green) %>
+            <% end %>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Token valid until</dt>
+            <% if @account.domain_com_au_access_token_expires_at.blank? %>
+              <%= render BadgeComponent.new(text: 'No token', color: :gray) %>
+            <% elsif @account.domain_com_au_access_token_expires_at.past? %>
+              <%= render BadgeComponent.new(text: @account.domain_com_au_access_token_expires_at.to_s, color: :red) %>
+            <% else %>
+              <%= render BadgeComponent.new(text: @account.domain_com_au_access_token_expires_at.to_s, color: :green) %>
+            <% end %>
+          </div>
+          <% %w(domain_com_au_agents_and_listings_api_key domain_com_au_properties_and_locations_api_key domain_com_au_price_estimation_api_key domain_com_au_address_suggestions_api_key domain_com_au_schools_data_api_key domain_com_au_listings_management_api_key domain_com_au_webhooks_api_key).each do |api_key| %>
+            <div class="sm:col-span-1">
+              <dt class="text-sm font-medium text-gray-500"><%= api_key.humanize %></dt>
+              <dd class="mt-1 text-sm text-gray-900"><%= @account[api_key.to_sym] || 'N/A' %></dd>
+            </div>
+          <% end %>
+        </dl>
+      </div>
+    <% end %>
+
+    <%= render CardContainerComponent.new do %>
+      <div class="px-4 py-5 sm:px-6 flex justify-between">
+        <div>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Domain webhook settings</h3>
+        </div>
+      </div>
+      <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+        <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Domain webhook ID</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @account.domain_com_au_webhooks_id || 'N/A' %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Domain webhooks verification code</dt>
+            <% if @account.domain_com_au_webhooks_verification_code.blank? %>
+              <%= render BadgeComponent.new(text: 'missing', color: :red) %>
+            <% else %>
+              <%= render BadgeComponent.new(text: 'present', color: :green) %>
+            <% end %>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Domain webhook subscriptions</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @account.domain_com_au_webhook_subscriptions || 'N/A' %></dd>
+          </div>
+          <div class="sm:col-span-2">
+            <h4 class="text-md font-medium leading-4 text-gray-900">Create a new webhook</h4>
+            <%= form_with model: [:console, @account, DomainComAu::Webhook::Subscription.new({ subscriber_id: @account.domain_com_au_webhooks_id, owner_id: @account.domain_com_au_agency_id })] do |form| %>
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 pt-4">
+                <div class="col-span-1">
+                  <%= render FormLabelComponent.new(form: form, name: :subscriber_id) %>
+                  <%= render FormTextFieldComponent.new(form: form, name: :subscriber_id, placeholder: 'whk_7d9c8f4a0cb54b948a010bb56ea98fe0') %>
+                </div>
+                <div class="col-span-1">
+                  <%= render FormLabelComponent.new(form: form, name: :owner_id) %>
+                  <%= render FormTextFieldComponent.new(form: form, name: :owner_id, placeholder: '45454') %>
+                </div>
+                <div class="col-span-1">
+                  <%= render FormLabelComponent.new(form: form, name: :owner_type) %>
+                  <div>
+                    <%= form.select :owner_type, %w(agency group provider member), {}, class: 'mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6' %>
+                  </div>
+                </div>
+                <div class="col-span-1">
+                  <%= render FormLabelComponent.new(form: form, name: :resource_type) %>
+                  <div>
+                    <%= form.select :resource_type, %w(agencies agents enquiries listings projects listingProcessingReports heartbeat), {}, class: 'mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6' %>
+                  </div>
+                </div>
+
+                <div class="col-span-1 sm:col-span-2 flex justify-end">
+                  <%= link_to 'Cancel', console_root_path, class: 'bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+                  <%= form.submit class: 'ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+                </div>
+              </div>
+            <% end %>
+
+          </div>
+        </dl>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%= render Console::ContainerComponent.new do %>
+    <%= render CardContainerComponent.new do %>
+      <div class="px-4 py-5 sm:px-6 flex justify-between">
+        <div>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Griffin portal settings</h3>
+        </div>
+      </div>
+      <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+        <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Griffin property API token</dt>
+            <dd class="mt-1 text-sm text-gray-900">
+              <% if @account.encrypted_griffin_property_com_au_api_token.blank? %>
+                <%= render BadgeComponent.new(text: 'missing', color: :red) %>
+              <% else %>
+                <%= render BadgeComponent.new(text: 'present', color: :green) %>
+              <% end %>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    <% end %>
+  <% end %>
+</div>

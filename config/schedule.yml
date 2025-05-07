@@ -1,0 +1,19 @@
+refresh_account_access_tokens_job:
+  name: 'Refresh Account Access Tokens'
+  cron: '*/5 * * * *'
+  class: 'RefreshAccountAccessTokensJob'
+
+fetch_realestate_com_au_enquiries_job:
+  name: 'Fetch Realestate.com.au Enquiries'
+  cron: '*/5 * * * *'
+  class: 'Account::Integrations::RealestateComAu::FetchEnquiriesJob'
+
+fetch_realestate_com_au_listing_upload_processing_status_job:
+  name: 'Fetch Realestate.com.au Listing Upload Processing Status'
+  cron: '*/5 * * * *'
+  class: 'Property::Integrations::RealestateComAu::FetchUploadProcessingStatusJob'
+
+incenerate_inbound_webhooks_job:
+  name: 'Incenerate Inbound Webhooks'
+  cron: '0 2 * * *'
+  class: 'InboundWebhooks::IncinerateJob'

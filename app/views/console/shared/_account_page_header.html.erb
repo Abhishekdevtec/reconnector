@@ -1,0 +1,16 @@
+<%= render Console::PageHeaderComponent.new(@account.company_name) do |header_component| %>
+  <% header_component.with_tabs([
+    { title: 'Account', path: console_account_path(@account) },
+    { title: 'Agents', path: console_account_agents_path(@account) },
+    { title: 'Properties', path: console_account_properties_path(@account) },
+    { title: 'PortalListings', path: console_account_portal_listings_path(@account) },
+    { title: 'Contacts', path: console_account_contacts_path(@account) },
+    { title: 'Classifiers', path: console_account_classifiers_path(@account) },
+    { title: 'Inbound Webhooks', path: console_account_inbound_webhooks_path(@account) },
+    { title: 'Raw Listing Enquiries', path: console_account_raw_listing_enquiries_path(@account) },
+    { title: 'Listing Enquiries', path: console_account_listing_enquiries_path(@account) }
+  ]) %>
+  <% header_component.with_buttons([
+    { title: 'Edit', path: edit_console_account_path(@account), primary: true, icon: :edit }
+  ]) %>
+<% end %>

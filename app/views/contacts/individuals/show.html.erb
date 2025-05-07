@@ -1,0 +1,66 @@
+<% content_for :page_title do %><%= @individual.name %> (Individual contact) | Reconnector.app<% end %>
+
+<%= render partial: 'contacts/header', locals: { object: @individual } %>
+<%= render partial: 'contacts/tabs',   locals: { object: @individual } %>
+
+<div class="space-y-6 lg:col-start-1 lg:col-span-2">
+  <!-- Description list-->
+  <section aria-labelledby="applicant-information-title">
+    <div class="bg-white shadow sm:rounded-lg">
+      <div class="px-4 py-5 sm:px-6">
+        <h2 id="applicant-information-title" class="text-lg leading-6 font-medium text-gray-900"><%= @individual.name %></h2>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= @individual.classification_names.to_sentence %></p>
+      </div>
+      <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+        <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Name</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @individual.name %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Email address</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= mail_to @individual.email if @individual.email.present? %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Mobile</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= phone_to @individual.mobile if @individual.mobile.present? %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Phone</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= phone_to @individual.phone if @individual.phone.present? %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Fax</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @individual.fax %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Registration number</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @individual.registration %></dd>
+          </div>
+          <div class="sm:col-span-2">
+            <dt class="text-sm font-medium text-gray-500">Notes</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @individual.notes %></dd>
+          </div>
+          <% if @individual.addresses.any? %>
+            <% @individual.addresses.each do |address| %>
+              <div class="sm:col-span-2">
+                <dt class="text-sm font-medium text-gray-500"><%= address.category.capitalize %> address</dt>
+                <dd class="mt-1 text-sm text-gray-900"><%= address.to_s %></dd>
+              </div>
+            <% end %>
+          <% end %>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <%= render partial: 'contacts/property_requirements/form', locals: { contact: @individual } %>
+
+  <% if @individual.listing_enquiries.any? %>
+    <div class="space-y-4">
+      <%= render HeaderComponent.new(text: 'Enquiries', tag: :h2, style: :h2) %>
+      <%= render partial: 'listing_enquiries/table', locals: { listing_enquiries: @individual.listing_enquiries } %>
+    </div>
+  <% end %>
+
+</div>

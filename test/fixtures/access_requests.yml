@@ -1,0 +1,35 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  company: MyString
+  agent_count: MyString
+  email: MyString
+  phone: MyString
+  request: MyText
+
+two:
+  first_name: MyString
+  last_name: MyString
+  company: MyString
+  agent_count: MyString
+  email: MyString
+  phone: MyString
+  request: MyText
+
+# == Schema Information
+#
+# Table name: access_requests
+#
+#  agent_count :string
+#  company     :string
+#  created_at  :datetime         not null
+#  email       :string
+#  first_name  :string
+#  id          :bigint           not null, primary key
+#  last_name   :string
+#  phone       :string
+#  request     :text
+#  updated_at  :datetime         not null
+#

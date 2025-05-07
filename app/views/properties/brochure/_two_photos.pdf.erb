@@ -1,0 +1,5 @@
+<section class="pdf-flex pdf-justify-between w-full">
+  <% images.each do |img| %>
+    <%= image_tag embed_image(img.variant(resize_to_fill: [480, 288]).processed), class: 'pdf-grow w-72 h-72 m-h-72' %>
+  <% end %>
+</section>

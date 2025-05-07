@@ -1,0 +1,172 @@
+# == Schema Information
+#
+# Table name: properties
+#
+#  agent_id                                :bigint           not null
+#  archived_at                             :datetime
+#  brochure_description_deprecated         :text
+#  building                                :string
+#  calculated_building_area                :decimal(, )
+#  city                                    :string
+#  clear_span_columns                      :string
+#  country                                 :string
+#  crane                                   :string
+#  created_at                              :datetime         not null
+#  disability_access                       :string
+#  domain_com_au_listed                    :boolean          default(FALSE)
+#  domain_com_au_listing_id                :string
+#  domain_com_au_process_id                :string
+#  entrances_roller_doors_container_access :string
+#  estate                                  :string
+#  fit_out_deprecated                      :text
+#  floor                                   :string
+#  floor_area                              :decimal(10, 2)
+#  floor_level                             :string
+#  furniture_deprecated                    :text
+#  grabline                                :string
+#  hard_stand_yard_area                    :decimal(10, 2)
+#  hard_stand_yard_description             :string
+#  headline                                :string
+#  id                                      :bigint           not null, primary key
+#  internal_id                             :string
+#  keywords                                :string
+#  land_area                               :decimal(10, 2)
+#  land_area_description                   :string
+#  lifts_escalators_travelators            :string
+#  local_council                           :string
+#  lot_number                              :string
+#  max_clearance_height                    :decimal(10, 2)
+#  min_clearance_height                    :decimal(10, 2)
+#  name                                    :string
+#  naming_rights                           :string
+#  naming_rights_cost_cents                :integer
+#  notes_deprecated                        :text
+#  office_area                             :decimal(10, 2)
+#  parking_comments                        :string
+#  parking_spaces                          :integer
+#  postal_code                             :string
+#  production_area                         :decimal(10, 2)
+#  rating                                  :string
+#  rea_listed                              :boolean          default(FALSE)
+#  rea_listing_id                          :string
+#  showroom_area                           :decimal(10, 2)
+#  state                                   :string
+#  storage_area                            :decimal(10, 2)
+#  street_name                             :string
+#  street_number                           :string
+#  trading_area                            :decimal(10, 2)
+#  type                                    :string
+#  unique_space_deprecated                 :string
+#  unit_suite_shop                         :string
+#  updated_at                              :datetime         not null
+#  usages                                  :string           default([]), is an Array
+#  warehouse_area                          :decimal(10, 2)
+#  website_description_deprecated          :text
+#  website_url                             :string
+#  zoning                                  :string
+#
+# Indexes
+#
+#  index_properties_on_agent_id     (agent_id)
+#  index_properties_on_internal_id  (internal_id)
+#  index_properties_on_type         (type)
+#  index_properties_on_usages       (usages) USING gin
+#
+commercial_property:
+  type: CommercialProperty
+  agent: bill
+  name: The hippiest commercial property in town
+  country: Australia
+
+industrial_property:
+  type: IndustrialProperty
+  agent: bill
+  name: The most industrial property in the zone
+  country: Australia
+
+residential_property:
+  type: ResidentialProperty
+  agent: bill
+  name: Suburbian dream
+  country: Australia
+
+retail_property:
+  type: RetailProperty
+  agent: bill
+  name: Super store
+  country: Australia
+
+contractless:
+  type: RetailProperty
+  agent: bill
+  name: Super store
+  country: Australia
+
+with_contract:
+  type: RetailProperty
+  agent: bill
+  name: Super store
+  country: Australia
+
+with_contact:
+  type: RetailProperty
+  agent: bill
+  name: Super store
+  country: Australia
+
+with_kitchen_sink:
+  type: ResidentialProperty
+  agent: bill
+  usages: ['usage one', 'usage two']
+  unique_space_deprecated: Unique space (deprecated)
+  floor_level: Ground
+  name: This is the name of the property with the kitchen sink
+  building: The buildy building
+  naming_rights: Of course
+  naming_rights_cost_cents: 50_000
+  estate: Of type Real
+  unit_suite_shop: Sweety suite
+  floor: There is a floor
+  street_number: 123
+  street_name: One two three street
+  state: Aybeesee
+  city: Cityville
+  postal_code: 90210
+  country: Australia
+  local_council: Cityville
+  office_area: 10.0
+  warehouse_area: 20.0
+  showroom_area: 30.0
+  storage_area: 40.0
+  production_area: 50.0
+  trading_area: 60.0
+  floor_area: 70.0
+  land_area: 80.0
+  hard_stand_yard_area: 90.0
+  land_area_description: Well, it's land
+  hard_stand_yard_description: Unlike land, this is hard stand yard
+  headline: The head of the line
+  grabline: The grab of the line
+  keywords: Key word keyword
+  parking_spaces: 2
+  parking_comments: Two parking spaces are available
+  lifts_escalators_travelators: Yeah, sure
+  min_clearance_height: 100.0
+  max_clearance_height: 200.0
+  clear_span_columns: If needed, yes
+  lot_number: 999
+  crane: Stolk
+  entrances_roller_doors_container_access: Without a doubt
+  zoning: Probably
+  disability_access: Depends
+  rating: 5
+  website_url: https://goog.com/properties
+
+
+already_listed:
+  type: IndustrialProperty
+  agent: bill
+  name: The most industrial property in the zone
+  country: Australia
+  domain_com_au_listing_id: 123456789
+  domain_com_au_process_id: 987654321

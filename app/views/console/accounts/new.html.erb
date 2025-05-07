@@ -1,0 +1,192 @@
+<%= render Console::PageHeaderComponent.new('New account') %>
+
+<%= render Console::ContainerComponent.new do %>
+  <%= form_with(model: [:console, @account]) do |form| %>
+    <div class="mt-6 space-y-6">
+      <%= render Console::FormSectionComponent.new(header: 'Account information', description: 'General information about the company.') do %>
+
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :company_name) %>
+          <%= render FormTextFieldComponent.new(form: form, name: :company_name, autocomplete: 'company-name') %>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :legal_name) %>
+          <%= render FormTextFieldComponent.new(form: form, name: :legal_name, autocomplete: 'legal-name') %>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :domain_name) %>
+          <div class="mt-1 flex rounded-md shadow-sm">
+            <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+              https://
+            </span>
+            <%= render FormTextFieldComponent.new(form: form, name: :domain_name, autocomplete: 'domain-name', class: 'flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300') %>
+          </div>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :email) %>
+          <%= render FormTextFieldComponent.new(form: form, name: :email, autocomplete: 'email') %>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :phone) %>
+          <%= render FormTextFieldComponent.new(form: form, name: :phone, type: :phone, autocomplete: 'phone') %>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :fax) %>
+          <%= render FormTextFieldComponent.new(form: form, name: :fax, type: :phone, autocomplete: 'fax') %>
+        </div>
+
+      <% end %>
+      <div class="flex justify-end">
+        <%= link_to 'Cancel', console_root_path, class: 'bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+        <%= form.submit class: 'ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= form_with(model: [:console, @account]) do |form| %>
+    <% if @account.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+        <ul>
+          <% @account.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <h2>Account information</h2>
+
+    <div class="field">
+      <%= form.label :company_name %>
+      <%= form.text_field :company_name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :legal_name %>
+      <%= form.text_field :legal_name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :domain_name %>
+      <%= form.text_field :domain_name %>
+    </div>
+
+    <h2>Agent information</h2>
+
+    <div class="field">
+      <%= form.label :agent_first_name %>
+      <%= form.text_field :agent_first_name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :agent_last_name %>
+      <%= form.text_field :agent_last_name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :agent_email %>
+      <%= form.text_field :agent_email %>
+    </div>
+
+    <div class="field">
+      <%= form.label :agent_password %>
+      <%= form.text_field :agent_password %>
+    </div>
+
+    <h2>Address information (Primary)</h2>
+
+    <div class="field">
+      <%= form.label :first_address_category %>
+      <%= form.text_field :first_address_category %>
+    </div>
+
+    <div class="field">
+      <%= form.label :first_address_line_1 %>
+      <%= form.text_field :first_address_line_1 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :first_address_line_2 %>
+      <%= form.text_field :first_address_line_2 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :first_address_line_3 %>
+      <%= form.text_field :first_address_line_3 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :first_address_city %>
+      <%= form.text_field :first_address_city %>
+    </div>
+
+    <div class="field">
+      <%= form.label :first_address_postal_code %>
+      <%= form.text_field :first_address_postal_code %>
+    </div>
+
+    <div class="field">
+      <%= form.label :first_address_state %>
+      <%= form.text_field :first_address_state %>
+    </div>
+
+    <div class="field">
+      <%= form.label :first_address_country %>
+      <%= form.text_field :first_address_country %>
+    </div>
+
+    <h2>Address information (Secondary)</h2>
+
+    <div class="field">
+      <%= form.label :second_address_category %>
+      <%= form.text_field :second_address_category %>
+    </div>
+
+    <div class="field">
+      <%= form.label :second_address_line_1 %>
+      <%= form.text_field :second_address_line_1 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :second_address_line_2 %>
+      <%= form.text_field :second_address_line_2 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :second_address_line_3 %>
+      <%= form.text_field :second_address_line_3 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :second_address_city %>
+      <%= form.text_field :second_address_city %>
+    </div>
+
+    <div class="field">
+      <%= form.label :second_address_postal_code %>
+      <%= form.text_field :second_address_postal_code %>
+    </div>
+
+    <div class="field">
+      <%= form.label :second_address_state %>
+      <%= form.text_field :second_address_state %>
+    </div>
+
+    <div class="field">
+      <%= form.label :second_address_country %>
+      <%= form.text_field :second_address_country %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+
+  <%= link_to 'Back', console_accounts_path %>
+
+  <% if Rails.env.development? && @account.errors.any? %>
+    <p><%= @account.errors.inspect %></p>
+  <% end %>
+<% end %>

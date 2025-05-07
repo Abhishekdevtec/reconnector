@@ -1,0 +1,65 @@
+<% content_for :page_title do %>Email prospects <%= @property.internal_id %> | Reconnector.app<% end %>
+
+<%= render Page::HeaderComponent.new('Email prospects') %>
+
+<% if @prospects.any? %>
+  <div class="w-full">
+    <%= form_tag email_prospects_path do %>
+      <div class="mt-8 flex flex-col">
+        <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+            <div class="relative overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+              <%= tag.table data: { controller: :'table-checkbox-toggle' }, class: 'min-w-full table-fixed divide-y divide-gray-300' do %>
+                <thead class="bg-gray-100">
+                  <tr>
+                    <th scope="col" class="relative w-12 px-6 sm:w-16 sm:px-8">
+                      <%= tag.input data: { action: 'table-checkbox-toggle#toggle' }, type: :checkbox, class: 'absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 sm:left-6' %>
+                    </th>
+                    <th scope="col" class="min-w-[12rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">Name</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Business</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email sent</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 bg-white">
+                  <%= render partial: 'properties/email_prospects/prospect_table_row', collection: @prospects, as: :prospect %>
+                </tbody>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pt-5">
+        <div class="flex justify-end space-x-4">
+          <%= link_to 'Cancel', @property, class: 'inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'%>
+          <%= button_tag type: 'submit', class: 'inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' do %>
+            <!-- Heroicon name: solid/mail -->
+            <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+            </svg>
+            Send emails
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="text-center">
+    <!-- Heroicon name: outline/emoji-sad -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <h3 class="mt-2 text-sm font-medium text-gray-900">No prospects</h3>
+    <p class="mt-1 text-sm text-gray-500">No contacts with property requirements were found.</p>
+    <div class="mt-6">
+      <%= link_to @property, type: 'button', class: 'inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' do %>
+        <!-- Heroicon name: solid/arrow-left -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+        </svg>
+        Back to the property
+      <% end %>
+    </div>
+  </div>
+<% end %>

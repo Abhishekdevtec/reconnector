@@ -1,0 +1,28 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  account: one
+  enabled: false
+  last_requested_at: <% Time.now %>
+
+two:
+  account: two
+  enabled: false
+  last_requested_at: <% Time.now %>
+
+# == Schema Information
+#
+# Table name: integrations_realestate_com_au_leads_apis
+#
+#  account_id          :bigint           not null
+#  created_at          :datetime         not null
+#  enabled             :boolean
+#  id                  :bigint           not null, primary key
+#  last_request_status :string
+#  last_requested_at   :datetime
+#  updated_at          :datetime         not null
+#
+# Indexes
+#
+#  index_integrations_realestate_com_au_leads_apis_on_account_id  (account_id)
+#

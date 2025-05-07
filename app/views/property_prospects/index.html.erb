@@ -1,0 +1,67 @@
+<%= render partial: 'properties/property_header', locals: { property: @property } %>
+
+<div class="w-full space-y-6">
+  <%= render partial: 'properties/property_tabs', locals: { property: @property } %>
+
+  <% if @property.prospects&.any? %>
+    <div class="flex flex-col w-full">
+      <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Name
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Email
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Mobile
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Phone
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Business
+                  </th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @property.prospects.each do |prospect| %>
+                  <tr class="<%= cycle('bg-white', 'bg-grey-50') -%>">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <%= prospect.name %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                      <%= mail_to prospect.email %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                      <%= phone_to prospect.mobile %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                      <%= phone_to prospect.phone %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">
+                      <% if prospect&.business&.any? %>
+                        <%= prospect&.business&.company_name %>
+                      <% else %>
+                        N/A
+                      <% end %>
+                    </td>
+                    <td class="px-6 py-4 space-x-6 whitespace-nowrap text-right text-sm font-medium">
+                      <%= link_to 'View', prospect, class: 'text-indigo-600 hover:text-indigo-900' %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

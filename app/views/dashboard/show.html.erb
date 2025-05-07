@@ -1,0 +1,25 @@
+<div class="space-y-6">
+  <%= render Page::HeaderComponent.new(friendly_greeting(Current.agent.first_name, Current.agent.time_zone)) %>
+
+  <% if @unviewed_listing_enquiries.any? %>
+    <div class="pt-6 space-y-6">
+      <%= render HeaderComponent.new(text: 'Enquiries', tag: :h2, style: :h2) %>
+      <%= render partial: 'listing_enquiries/table', locals: { listing_enquiries: @unviewed_listing_enquiries } %>
+    </div>
+  <% end %>
+
+  <% if @recent_contacts.any? %>
+    <div class="pt-6 space-y-6">
+      <%= render HeaderComponent.new(text: 'Recent contacts', tag: :h2, style: :h2) %>
+      <%= render partial: 'contacts/table', locals: { contacts: @recent_contacts } %>
+    </div>
+  <% end %>
+
+  <% if @recent_properties.any? %>
+    <div class="pt-6 space-y-6">
+      <%= render HeaderComponent.new(text: 'Recent properties', tag: :h2, style: :h2) %>
+      <%= render partial: 'properties/table', locals: { properties: @recent_properties, sortable: false } %>
+    </div>
+  <% end %>
+
+</div>

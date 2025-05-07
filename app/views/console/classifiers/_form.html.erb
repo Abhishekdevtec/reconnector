@@ -1,0 +1,27 @@
+<%= form_with(model: [:console, @account, classifier]) do |form| %>
+  <% if classifier.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(classifier.errors.count, "error") %> prohibited this classifier from being saved:</h2>
+
+      <ul>
+        <% classifier.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :account_id %>
+    <%= form.collection_select :account_id, Account.all.order(:company_name), :id, :company_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,23 @@
+<% content_for :page_heading do %>
+  <%= render Page::ContainerComponent.new do %>
+    <header class="pt-8 flex justify-between items-center w-full">
+      <div class="flex-1 min-w-0">
+        <%= render HeaderComponent.new(text: @title)%>
+        <% if @subtitle.present? %>
+          <p class="mt-1 max-w-2xl text-sm text-gray-500">
+            <%= @subtitle %>
+          </p>
+        <% elsif @last_updated_at %>
+          <p class="mt-1 max-w-2xl text-sm text-gray-500">
+            Last updated at <%= render TimeWithZoneComponent.new(date_time: @last_updated_at, format: :short, time_zone: Current.agent.time_zone) %>
+          </p>
+        <% end %>
+      </div>
+      <% if content %>
+        <div class="mt-4 flex justify-between space-x-4 sm:mt-0 sm:ml-6 sm:flex-shrink-0 sm:justify-start">
+          <%= content %>
+        </div>
+      <% end %>
+    </header>
+  <% end %>
+<% end %>

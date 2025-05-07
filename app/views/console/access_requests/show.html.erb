@@ -1,0 +1,46 @@
+<%= render Console::ContainerComponent.new do %>
+
+  <div class="flex flex-col space-y-8">
+    <%= render CardContainerComponent.new do %>
+      <div class="px-4 py-5 sm:px-6 flex justify-between">
+        <div>
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Access request details</h3>
+          <p class="mt-1 max-w-2xl text-sm text-gray-500" title="<%= @access_request.created_at %>">Created <%= distance_of_time_in_words_to_now(@access_request.created_at) %> ago.</p>
+        </div>
+      </div>
+      <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+        <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Company name</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @access_request.company %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Name</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @access_request.name %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Email address</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @access_request.email %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Phone</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @access_request.phone %></dd>
+          </div>
+          <div class="sm:col-span-2">
+            <dt class="text-sm font-medium text-gray-500">Agents</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @access_request.agent_count %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Request</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @access_request.request %></dd>
+          </div>
+        </dl>
+      </div>
+    <% end %>
+
+    <div class="shrink">
+      <%= render DeleteButtonComponent.new(text: 'Delete', url: console_access_request_path(@access_request)) %>
+    </div>
+  </div>
+
+<% end %>

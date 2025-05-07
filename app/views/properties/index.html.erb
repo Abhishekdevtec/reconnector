@@ -1,0 +1,59 @@
+<% content_for :page_title do %>Properties | Reconnector.app<% end %>
+
+<%= render Page::HeaderComponent.new('Properties') do %>
+  <%= render SearchButtonComponent.new(text: 'Advanced search', url: new_property_search_form_path) %>
+  <%= new_commercial_property_button %>
+<% end %>
+
+<div class="w-full pb-8">
+
+  <%= render TabContainerComponent.new do |c| %>
+    <%= c.with_tab(name: 'All',         url: properties_url,              active: controller_name.eql?('properties')) %>
+    <%= c.with_tab(name: 'Commercial',  url: commercial_properties_path,  active: controller_name.include?('commercial')) %>
+    <%= c.with_tab(name: 'Industrial',  url: industrial_properties_path,  active: controller_name.include?('industrial')) %>
+    <%= c.with_tab(name: 'Residential', url: residential_properties_path, active: controller_name.include?('residential')) %>
+    <%= c.with_tab(name: 'Retail',      url: retail_properties_path,      active: controller_name.include?('retail')) %>
+    <%= c.with_tab(name: 'Archived',    url: archived_properties_path,      active: controller_name.include?('archived')) %>
+  <% end %>
+
+  <% if @properties.empty? %>
+    <%= render 'no_properties' %>
+  <% else %>
+    <%= form_tag edit_multiple_properties_path do %>
+
+      <div class="mt-6 space-y-6">
+        <%= render partial: 'properties/table', locals: { properties: @properties, sortable: true } %>
+        <div class="flex space-x-4">
+          <% if current_page?(archived_properties_path) %>
+            <%= button_to nil, { name:'restore_multiple', value: 'Restore', class: 'inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' } do %>
+              <!-- Heroicon name: solid/reply -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M7.707 3.293a1 1 0 010 1.414L5.414 7H11a7 7 0 017 7v2a1 1 0 11-2 0v-2a5 5 0 00-5-5H5.414l2.293 2.293a1 1 0 11-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              Restore
+            <% end %>
+          <% else %>
+            <%= button_to nil, { name:'archive_multiple', value: 'Archive', class: 'inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' } do %>
+              <!-- Heroicon name: solid/archive -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
+                <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" />
+              </svg>
+              Archive
+            <% end %>
+            <% if @account.griffin_property_credentials? %>
+              <%= submit_tag 'Upload to Company website', name:'upload_to_griffin_property_com_au', class: 'inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+            <% end %>
+            <%= submit_tag 'Upload to RealEstate.com.au', name:'upload_to_rea', class: 'inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+            <%= submit_tag 'Upload to Domain.com.au', name:'upload_to_domain_com_au', class: 'inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="mx-auto flex justify-center">
+    <%= pagination_navigation(@pagy) %>
+  </div>
+
+</div>

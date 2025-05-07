@@ -1,0 +1,82 @@
+# == Schema Information
+#
+# Table name: contacts
+#
+#  account_id                     :bigint           not null
+#  agent_id                       :bigint           not null
+#  business_id                    :bigint
+#  business_name                  :string
+#  classifiable_id                :bigint
+#  classifiable_type              :string
+#  created_at                     :datetime         not null
+#  email                          :string
+#  ews_change_key                 :string
+#  ews_created_at                 :datetime
+#  ews_imported_from_ews          :boolean          default(FALSE)
+#  ews_item_id                    :string
+#  ews_last_modified_at           :datetime
+#  ews_received_at                :datetime
+#  ews_sent_at                    :datetime
+#  fax                            :string
+#  first_name                     :string
+#  id                             :bigint           not null, primary key
+#  job_title                      :string
+#  last_name                      :string
+#  legal_name                     :string
+#  mobile                         :string
+#  notes                          :text
+#  phone                          :string
+#  registration                   :string
+#  share                          :boolean          default(FALSE)
+#  skype                          :string
+#  source_id                      :string
+#  synchronize_with_office_online :boolean          default(FALSE)
+#  type                           :string
+#  updated_at                     :datetime         not null
+#  url                            :string
+#
+# Indexes
+#
+#  index_contacts_on_account_id    (account_id)
+#  index_contacts_on_agent_id      (agent_id)
+#  index_contacts_on_business_id   (business_id)
+#  index_contacts_on_classifiable  (classifiable_type,classifiable_id)
+#
+business:
+  type: Business
+  agent: bill
+  account: one
+  share: false
+  business_name: Hypetop Hits
+  legal_name: Hypetop Hits Incorporated
+
+individual:
+  type: Individual
+  agent: bill
+  account: one
+  share: true
+  first_name: John
+  last_name: Smith
+
+unshared_business:
+  type: Business
+  agent: bill
+  account: one
+  share: false
+  business_name: Unshared Business
+  legal_name: Unshared Business International
+
+unshared_individual:
+  type: Individual
+  agent: bill
+  account: one
+  share: false
+  first_name: John
+  last_name: Smith
+
+property_owner:
+  type: Individual
+  agent: bill
+  account: one
+  first_name: Monopoly
+  last_name: Guy

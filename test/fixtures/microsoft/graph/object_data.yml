@@ -1,0 +1,34 @@
+# == Schema Information
+#
+# Table name: ms_graph_object_data
+#
+#  change_key                          :string
+#  created_at                          :datetime         not null
+#  created_date_time                   :datetime
+#  etag                                :string
+#  id                                  :bigint           not null, primary key
+#  last_modified_date_time             :datetime
+#  last_received_at                    :datetime
+#  last_sent_at                        :datetime
+#  microsoft_graph_synchronizable_id   :bigint           not null
+#  microsoft_graph_synchronizable_type :string           not null
+#  object_id                           :string
+#  parent_folder_id                    :string
+#  updated_at                          :datetime         not null
+#
+# Indexes
+#
+#  index_ms_graph_object_data_on_microsoft_graph_synchronizable  (microsoft_graph_synchronizable_type,microsoft_graph_synchronizable_id)
+#
+
+# two:
+#   id: MyString
+#   change_key: MyString
+#   parent_folder_id: MyString
+#   etag: MyString
+#   created_date_time: 2023-02-11 11:11:51
+#   last_modified_date_time_datetime: MyString
+#   last_sent_at: 2023-02-11 11:11:51
+#   last_received_at: 2023-02-11 11:11:51
+#   microsoft_graph_synchronizable: two
+#   microsoft_graph_synchronizable_type: Microsoft graph synchronizable

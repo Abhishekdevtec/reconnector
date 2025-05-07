@@ -1,0 +1,129 @@
+<%= form_with model: property_search_form, method: :get do |form| %>
+
+  <div class="pb-8 space-y-8">
+
+    <div class="grid grid-cols-6 gap-6">
+      <div class="col-span-6 sm:col-span-2">
+        <p class="block text-sm font-medium text-gray-700">
+          Lease and/or Sale
+        </p>
+        <div class="mt-2 p-4 flex space-x-8 rounded-lg border border-gray-300 shadow-sm bg-white">
+          <% form.object.default_contract_types.each do |usage| %>
+            <div class="relative flex items-start">
+              <div class="flex items-center h-5">
+                <%= form.check_box usage.to_sym, { class: 'focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded' }, usage, false %>
+              </div>
+              <div class="ml-2 text-sm">
+                <%= form.label usage, class: 'font-medium text-gray-700' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="col-span-6 sm:col-span-4">
+        <p class="block text-sm font-medium text-gray-700">
+          Classifications
+        </p>
+        <div class="mt-2 p-4 grid grid-cols-1 gap-5 sm:grid-cols-4 rounded-lg border border-gray-300 shadow-sm bg-white">
+          <% form.object.default_classifications.each do |classification| %>
+            <div class="relative flex items-start">
+              <div class="flex items-center h-5">
+                <%= form.check_box :classifications, { multiple: true, class: 'focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded' }, classification, false %>
+              </div>
+              <div class="ml-2 text-sm">
+                <%= form.label classification, class: 'font-medium text-gray-700' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="col-span-6 sm:col-span-6">
+        <p class="block text-sm font-medium text-gray-700">
+          Usages
+        </p>
+        <div class="mt-2 p-4 grid grid-cols-1 gap-5 sm:grid-cols-6 rounded-lg border border-gray-300 shadow-sm bg-white">
+          <% form.object.default_usages.each do |usage| %>
+            <div class="relative flex items-start">
+              <div class="flex items-center h-5">
+                <%= form.check_box :usages, { multiple: true, class: 'focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded' }, usage, false %>
+              </div>
+              <div class="ml-2 text-sm">
+                <%= form.label t("activerecord.attributes.property.usages.#{usage}"), class: 'font-medium text-gray-700 whitespace-nowrap' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="col-span-6 sm:col-span-6">
+        <%= render FormLabelComponent.new(form: form, name: :street_name) %>
+        <%= render FormTextFieldComponent.new(form: form, name: :street_name) %>
+      </div>
+
+      <div class="grid grid-cols-6 gap-6 col-span-6">
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :country, title: 'Country / Region') %>
+          <%= render FormCollectionSelectComponent.new(form: form, name: :country, collection: Country.all.order(:name), attribute: :name, component_options: { include_blank: 'Select a value' }) %>
+        </div>
+
+        <div class="col-span-6 sm:col-span-3">
+          <%= render FormLabelComponent.new(form: form, name: :state) %>
+          <%= render FormCollectionSelectComponent.new(form: form, name: :state, collection: State.all.order(:name), attribute: :name, component_options: { include_blank: 'Select a value' }) %>
+        </div>
+      </div>
+
+      <div class="col-span-3 sm:col-span-2">
+        <%= render FormLabelComponent.new(form: form, name: :district) %>
+        <%= render FormCollectionSelectComponent.new(form: form, name: :district, collection: District.all.order(:name), attribute: :name, component_options: { include_blank: 'Select a value' }) %>
+      </div>
+
+      <div class="col-span-6 sm:col-span-2">
+        <%= render FormLabelComponent.new(form: form, name: :Suburb) %>
+        <%= render FormTextFieldComponent.new(form: form, name: :city) %>
+      </div>
+
+      <div class="col-span-6 sm:col-span-2">
+        <%= render FormLabelComponent.new(form: form, name: :postal_code) %>
+        <%= render FormTextFieldComponent.new(form: form, name: :postal_code) %>
+      </div>
+
+      <div class="col-span-3 sm:col-span-1">
+        <%= render FormLabelComponent.new(form: form, name: :sale_price_min) %>
+        <%= render FormPriceFieldComponent.new(form: form, name: :sale_price_min) %>
+      </div>
+
+      <div class="col-span-3 sm:col-span-1">
+        <%= render FormLabelComponent.new(form: form, name: :sale_price_max) %>
+        <%= render FormPriceFieldComponent.new(form: form, name: :sale_price_max) %>
+      </div>
+
+      <div class="col-span-3 sm:col-span-1">
+        <%= render FormLabelComponent.new(form: form, name: :lease_price_min) %>
+        <%= render FormPriceFieldComponent.new(form: form, name: :lease_price_min) %>
+      </div>
+
+      <div class="col-span-3 sm:col-span-1">
+        <%= render FormLabelComponent.new(form: form, name: :lease_price_max) %>
+        <%= render FormPriceFieldComponent.new(form: form, name: :lease_price_max) %>
+      </div>
+
+      <div class="col-span-3 sm:col-span-1">
+        <%= render FormLabelComponent.new(form: form, name: :total_area_min) %>
+        <%= render FormTextFieldComponent.new(form: form, name: :total_area_min) %>
+      </div>
+
+      <div class="col-span-3 sm:col-span-1">
+        <%= render FormLabelComponent.new(form: form, name: :total_area_max) %>
+        <%= render FormTextFieldComponent.new(form: form, name: :total_area_max) %>
+      </div>
+
+    </div>
+
+    <div class="flex justify-end">
+      <%= button_tag 'Search', class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+    </div>
+  </div>
+
+<% end %>

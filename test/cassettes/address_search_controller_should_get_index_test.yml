@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://nominatim.openstreetmap.org/search?accept-language=en&addressdetails=1&countrycodes=au&format=json&q=93-95%20Derby%20St,%20Silverwater,%20Australia
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 19 Aug 2023 08:03:03 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '742'
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        W3sicGxhY2VfaWQiOjcwMDgxNDQ1LCJsaWNlbmNlIjoiRGF0YSDCqSBPcGVuU3RyZWV0TWFwIGNvbnRyaWJ1dG9ycywgT0RiTCAxLjAuIGh0dHA6Ly9vc20ub3JnL2NvcHlyaWdodCIsIm9zbV90eXBlIjoibm9kZSIsIm9zbV9pZCI6NjQ5NjcyMDk1OSwibGF0IjoiLTMzLjgzNDA2MTYiLCJsb24iOiIxNTEuMDQwMzYyMiIsImNsYXNzIjoicGxhY2UiLCJ0eXBlIjoiaG91c2UiLCJwbGFjZV9yYW5rIjozMCwiaW1wb3J0YW5jZSI6OS45OTk5OTk5OTQ3MzY0NDJlLTA4LCJhZGRyZXNzdHlwZSI6InBsYWNlIiwibmFtZSI6IiIsImRpc3BsYXlfbmFtZSI6IjkzLTk1LCBEZXJieSBTdHJlZXQsIFNpbHZlcndhdGVyLCBTeWRuZXksIENpdHkgb2YgUGFycmFtYXR0YSBDb3VuY2lsLCBOZXcgU291dGggV2FsZXMsIDIxMjgsIEF1c3RyYWxpYSIsImFkZHJlc3MiOnsiaG91c2VfbnVtYmVyIjoiOTMtOTUiLCJyb2FkIjoiRGVyYnkgU3RyZWV0Iiwic3VidXJiIjoiU2lsdmVyd2F0ZXIiLCJjaXR5IjoiU3lkbmV5IiwibXVuaWNpcGFsaXR5IjoiQ2l0eSBvZiBQYXJyYW1hdHRhIENvdW5jaWwiLCJzdGF0ZSI6Ik5ldyBTb3V0aCBXYWxlcyIsIklTTzMxNjYtMi1sdmw0IjoiQVUtTlNXIiwicG9zdGNvZGUiOiIyMTI4IiwiY291bnRyeSI6IkF1c3RyYWxpYSIsImNvdW50cnlfY29kZSI6ImF1In0sImJvdW5kaW5nYm94IjpbIi0zMy44MzQxMTE2IiwiLTMzLjgzNDAxMTYiLCIxNTEuMDQwMzEyMiIsIjE1MS4wNDA0MTIyIl19XQ==
+  recorded_at: Sat, 19 Aug 2023 08:03:03 GMT
+recorded_with: VCR 6.2.0

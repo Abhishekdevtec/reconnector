@@ -1,0 +1,68 @@
+<div class="grid grid-cols-6 gap-6">
+  <% if action_name == 'edit' %>
+    <div class="col-span-6 sm:col-span-3">
+      <%= render FormLabelComponent.new(form: form, name: :type, title: 'Property type') %>
+      <%= form.collection_select(:type, property_type_collection, :type, :name, {}, class: 'mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm') %>
+    </div>
+  <% end %>
+
+  <div class="col-span-6 sm:col-span-6">
+    <p class="block text-sm font-medium text-gray-700">
+      Usages
+    </p>
+    <div class="mt-2 p-4 grid grid-cols-1 gap-5 sm:grid-cols-4 rounded-lg border border-gray-300 shadow-sm bg-white">
+      <%= form.collection_check_boxes(:usages, @property.usage_values, :name, :name, { include_hidden: false }) do |b| %>
+        <div class="relative flex items-start">
+          <div class="flex items-center h-5">
+            <%= b.check_box class: 'focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded' %>
+          </div>
+          <div class="ml-2 text-sm">
+            <%= b.label class: 'font-medium text-gray-700' do %>
+              <%= t("activerecord.attributes.property.usages.#{b.text}") %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-span-6 sm:col-span-4">
+    <%= render FormLabelComponent.new(form: form, name: :name) %>
+    <%= render FormTextFieldComponent.new(form: form, name: :name, type: :text) %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-3">
+    <%= render FormLabelComponent.new(form: form, name: :naming_rights) %>
+    <%= render FormTextFieldComponent.new(form: form, name: :naming_rights, type: :text) %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-3">
+    <%= render FormLabelComponent.new(form: form, name: :naming_rights_cost) %>
+    <%= render FormPriceFieldComponent.new(form: form, name: :naming_rights_cost, currency: 'AUD') %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-3">
+    <%= render FormLabelComponent.new(form: form, name: :unit_suite_shop, title: 'Suite') %>
+    <%= render FormTextFieldComponent.new(form: form, name: :unit_suite_shop, type: :text) %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-3">
+    <%= render FormLabelComponent.new(form: form, name: :floor, title: 'Floor level') %>
+    <%= render FormTextFieldComponent.new(form: form, name: :floor, type: :text) %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-3">
+    <%= render FormLabelComponent.new(form: form, name: :building) %>
+    <%= render FormTextFieldComponent.new(form: form, name: :building, type: :text) %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-3">
+    <%= render FormLabelComponent.new(form: form, name: :estate, title: 'Shopping center') %>
+    <%= render FormTextFieldComponent.new(form: form, name: :estate, type: :text) %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <%= render partial: 'address_fields', locals: { form: form } %>
+  </div>
+
+</div>

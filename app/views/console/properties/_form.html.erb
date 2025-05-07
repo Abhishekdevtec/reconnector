@@ -1,0 +1,262 @@
+<%= form_with(model: [:console, @account, property]) do |form| %>
+  <% if property.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(property.errors.count, "error") %> prohibited this property from being saved:</h2>
+
+      <ul>
+        <% property.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.select :type, ['CommercialProperty', 'IndustrialProperty', 'ResidentialProperty', 'RetailProperty'].collect { |p| [p, p] } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :agent_id %>
+    <%= form.collection_select :agent_id, @account.agents.all, :id, :name %>
+  </div>
+
+  <div class="col-span-6 sm:col-span-6">
+    <p class="block text-sm font-medium text-gray-700">
+      Usages
+    </p>
+    <div class="mt-2 p-4 grid grid-cols-1 gap-5 sm:grid-cols-4 rounded-lg border border-gray-300 shadow-sm">
+      <%= form.collection_check_boxes(:usages, form.object.usage_values, :name, :name, { include_hidden: false }) do |b| %>
+        <div class="relative flex items-start">
+          <div class="flex items-center h-5">
+            <%= b.check_box class: 'focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded' %>
+          </div>
+          <div class="ml-2 text-sm">
+            <%= b.label class: 'font-medium text-gray-700' do %>
+              <%= b.text.humanize %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :internal_id %>
+    <%= form.text_field :internal_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :unique_space_deprecated %>
+    <%= form.text_field :unique_space_deprecated %>
+  </div>
+
+  <div class="field">
+    <%= form.label :floor_level %>
+    <%= form.text_field :floor_level %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :building %>
+    <%= form.text_field :building %>
+  </div>
+
+  <div class="field">
+    <%= form.label :naming_rights %>
+    <%= form.text_field :naming_rights %>
+  </div>
+
+  <div class="field">
+    <%= form.label :naming_rights_cost_cents %>
+    <%= form.number_field :naming_rights_cost_cents %>
+  </div>
+
+  <div class="field">
+    <%= form.label :estate %>
+    <%= form.text_field :estate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :unit_suite_shop %>
+    <%= form.text_field :unit_suite_shop %>
+  </div>
+
+  <div class="field">
+    <%= form.label :floor %>
+    <%= form.text_field :floor %>
+  </div>
+
+  <div class="field">
+    <%= form.label :street_number %>
+    <%= form.text_field :street_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :street_name %>
+    <%= form.text_field :street_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Suburb %>
+    <%= form.text_field :city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :postal_code %>
+    <%= form.text_field :postal_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :country %>
+    <%= form.text_field :country %>
+  </div>
+
+  <div class="field">
+    <%= form.label :office_area %>
+    <%= form.text_field :office_area %>
+  </div>
+
+  <div class="field">
+    <%= form.label :warehouse_area %>
+    <%= form.text_field :warehouse_area %>
+  </div>
+
+  <div class="field">
+    <%= form.label :showroom_area %>
+    <%= form.text_field :showroom_area %>
+  </div>
+
+  <div class="field">
+    <%= form.label :storage_area %>
+    <%= form.text_field :storage_area %>
+  </div>
+
+  <div class="field">
+    <%= form.label :production_area %>
+    <%= form.text_field :production_area %>
+  </div>
+
+  <div class="field">
+    <%= form.label :trading_area %>
+    <%= form.text_field :trading_area %>
+  </div>
+
+  <div class="field">
+    <%= form.label :land_area %>
+    <%= form.text_field :land_area %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hard_stand_yard_area %>
+    <%= form.text_field :hard_stand_yard_area %>
+  </div>
+
+  <div class="field">
+    <%= form.label :floor_area %>
+    <%= form.text_field :floor_area %>
+  </div>
+
+  <div class="field">
+    <%= form.label :headline %>
+    <%= form.text_field :headline %>
+  </div>
+
+  <div class="field">
+    <%= form.label :grabline %>
+    <%= form.text_field :grabline %>
+  </div>
+
+  <div class="field">
+    <%= form.label :keywords %>
+    <%= form.text_field :keywords %>
+  </div>
+
+  <div class="field">
+    <%= form.label :brochure_description %>
+    <%= form.rich_text_area :brochure_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :website_description %>
+    <%= form.rich_text_area :website_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parking_spaces %>
+    <%= form.number_field :parking_spaces, min: 0 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parking_comments %>
+    <%= form.text_field :parking_comments %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fit_out %>
+    <%= form.rich_text_area :fit_out %>
+  </div>
+
+  <div class="field">
+    <%= form.label :furniture %>
+    <%= form.rich_text_area :furniture %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lifts_escalators_travelators %>
+    <%= form.text_field :lifts_escalators_travelators %>
+  </div>
+
+  <div class="field">
+    <%= form.label :min_clearance_height %>
+    <%= form.number_field :min_clearance_height %>
+  </div>
+
+  <div class="field">
+    <%= form.label :max_clearance_height %>
+    <%= form.number_field :max_clearance_height %>
+  </div>
+
+  <div class="field">
+    <%= form.label :clear_span_columns %>
+    <%= form.text_field :clear_span_columns %>
+  </div>
+
+  <div class="field">
+    <%= form.label :crane %>
+    <%= form.text_field :crane %>
+  </div>
+
+  <div class="field">
+    <%= form.label :entrances_roller_doors_container_access %>
+    <%= form.text_field :entrances_roller_doors_container_access %>
+  </div>
+
+  <div class="field">
+    <%= form.label :zoning %>
+    <%= form.text_field :zoning %>
+  </div>
+
+  <div class="field">
+    <%= form.label :disability_access %>
+    <%= form.text_field :disability_access %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rating %>
+    <%= form.text_field :rating %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

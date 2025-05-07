@@ -1,0 +1,7 @@
+<% content_for :page_title do %>New contract | Reconnector.app<% end %>
+
+<%= render Page::HeaderComponent.new('New contract') %>
+
+<div class="pb-8">
+  <%= render 'form', contract: @contract %>
+</div>

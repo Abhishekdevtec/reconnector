@@ -1,0 +1,11 @@
+<% if items? %>
+  <div class="border-t border-gray-200">
+    <dl>
+      <% items.each do |item| %>
+        <div class="<%= item_container_classes %>">
+          <%= item %>
+        </div>
+      <% end %>
+    </dl>
+  </div>
+<% end %>

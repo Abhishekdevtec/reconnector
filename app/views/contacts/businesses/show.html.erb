@@ -1,0 +1,59 @@
+<% content_for :page_title do %><%= @business.name %> (Business contact) | Reconnector.app<% end %>
+
+<%= render partial: 'contacts/header', locals: { object: @business } %>
+<%= render partial: 'contacts/tabs',   locals: { object: @business } %>
+
+<div class="space-y-6 lg:col-start-1 lg:col-span-2">
+  <!-- Description list-->
+  <section aria-labelledby="applicant-information-title">
+    <div class="bg-white shadow sm:rounded-lg">
+      <div class="px-4 py-5 sm:px-6">
+        <h2 id="applicant-information-title" class="text-lg leading-6 font-medium text-gray-900"><%= @business.name %></h2>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500"><%= @business.classification_names.to_sentence %></p>
+      </div>
+      <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+        <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Legal name</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @business.legal_name %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Email address</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= mail_to @business.email if @business.email.present? %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Mobile</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= phone_to @business.mobile if @business.mobile.present? %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Phone</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= phone_to @business.phone if @business.phone.present? %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Fax</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @business.fax %></dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Registration number</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @business.registration %></dd>
+          </div>
+          <div class="sm:col-span-2">
+            <dt class="text-sm font-medium text-gray-500">Notes</dt>
+            <dd class="mt-1 text-sm text-gray-900"><%= @business.notes %></dd>
+          </div>
+          <% if @business.addresses.any? %>
+            <% @business.addresses.each do |address| %>
+              <div class="sm:col-span-2">
+                <dt class="text-sm font-medium text-gray-500"><%= address.category.capitalize %> address</dt>
+                <dd class="mt-1 text-sm text-gray-900"><%= address.to_s %></dd>
+              </div>
+            <% end %>
+          <% end %>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <%= render partial: 'contacts/property_requirements/form', locals: { contact: @business } %>
+
+</div>

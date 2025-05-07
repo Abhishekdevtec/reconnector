@@ -1,0 +1,5 @@
+<% if @date_time %>
+  <%= tag.time datetime: @date_time.to_fs(:iso8601) do %><%= @date_time.in_time_zone(@time_zone).to_fs(@format) %><% end %>
+<% else %>
+  Unknown date/time
+<% end %>

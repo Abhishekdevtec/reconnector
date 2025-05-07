@@ -1,0 +1,48 @@
+<div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3">
+  <div>
+    <h2 class="text-base font-semibold leading-7 text-gray-900"><%= @address_type %></h2>
+    <% if @description.present? %>
+      <p class="mt-1 text-sm leading-6 text-gray-600"><%= @description %></p>
+    <% end %>
+  </div>
+  <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
+    <div class="col-span-full">
+      <div>
+        <%= render FormLabelComponent.new(form: @form, name: :line_1) %>
+        <%= render FormTextFieldComponent.new(form: @form, name: :line_1) %>
+      </div>
+    </div>
+    <div class="col-span-full">
+      <div>
+        <%= render FormLabelComponent.new(form: @form, name: :line_2) %>
+        <%= render FormTextFieldComponent.new(form: @form, name: :line_2) %>
+      </div>
+    </div>
+    <div class="col-span-full">
+      <div>
+        <%= render FormLabelComponent.new(form: @form, name: :line_3) %>
+        <%= render FormTextFieldComponent.new(form: @form, name: :line_3) %>
+      </div>
+    </div>
+
+    <div class="sm:col-span-3">
+      <%= render FormLabelComponent.new(form: @form, name: :city) %>
+      <%= render FormTextFieldComponent.new(form: @form, name: :city) %>
+    </div>
+
+    <div class="sm:col-span-3">
+      <%= render FormLabelComponent.new(form: @form, name: :postal_code) %>
+      <%= render FormTextFieldComponent.new(form: @form, name: :postal_code) %>
+    </div>
+
+    <div class="sm:col-span-3">
+      <%= render FormLabelComponent.new(form: @form, name: :state) %>
+      <%= render ComboboxComponent.new(form: @form, name: :state, collection: State.all.order(:name)) %>
+    </div>
+
+    <div class="sm:col-span-3">
+      <%= render FormLabelComponent.new(form: @form, name: :country, title: 'Country / Region') %>
+      <%= render ComboboxComponent.new(form: @form, name: :country, collection: Country.all.order(:name)) %>
+    </div>
+  </div>
+</div>

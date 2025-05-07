@@ -1,0 +1,6 @@
+<%= render Page::HeaderComponent.new('Agents') %>
+
+<div class="w-full">
+  <%= render 'accounts/account_menu_options' %>
+  <%= render partial: 'form', locals: { account: Current.account, agent: @agent, url: account_agent_path(@agent) } %>
+</div>

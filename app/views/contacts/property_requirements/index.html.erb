@@ -1,0 +1,60 @@
+<% content_for :page_title do %><%= @contact.name %> | Property requirements | Reconnector.app<% end %>
+
+<%= render Page::HeaderComponent.new("#{@contact.name} property requirements") %>
+<%= render partial: 'contacts/tabs', locals: { object: @contact } %>
+
+<% if @property_requirements.blank? %>
+  <div class="text-center">
+    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+    </svg>
+    <h3 class="mt-2 text-sm font-medium text-gray-900">No properties found</h3>
+  </div>
+<% else %>
+  <% @property_requirements.each do |property_requirement| %>
+    <%= render CardContainerComponent.new do %>
+      <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+        <div class="px-4 py-5 sm:px-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-medium leading-6 text-gray-900"><%= property_requirement_header(property_requirement) %></h3>
+            <%= render DeleteButtonComponent.new(text: 'Delete', url: contact_property_requirement_path(@contact, property_requirement)) %>
+          </div>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+          <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+            <% if property_requirement.area_from.present? || property_requirement.area_to.present? %>
+              <div class="sm:col-span-1">
+                <dt class="text-sm font-medium text-gray-500">Area</dt>
+                <dd class="mt-1 text-sm text-gray-900"><%= property_requirements_area_label(property_requirement) %></dd>
+              </div>
+            <% end %>
+            <% if property_requirement.price_from_cents.present? || property_requirement.price_to_cents.present? %>
+              <div class="sm:col-span-1">
+                <dt class="text-sm font-medium text-gray-500">Price</dt>
+                <dd class="mt-1 text-sm text-gray-900"><%= property_requirements_price_label(property_requirement) %></dd>
+              </div>
+            <% end %>
+            <% if property_requirement.suburbs.present? %>
+              <div class="sm:col-span-2">
+                <dt class="text-sm font-medium text-gray-500">Suburbs</dt>
+                <dd class="mt-1 text-sm text-gray-900"><%= property_requirements_suburb_names(property_requirement) %></dd>
+              </div>
+            <% end %>
+          </dl>
+        </div>
+        <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+          <% if property_requirement.matching_properties.blank? %>
+            <div class="text-center">
+              <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+              </svg>
+              <h3 class="mt-2 text-sm font-medium text-gray-900">No matching properties found</h3>
+            </div>
+          <% else %>
+            <%= render partial: 'properties/table', locals: { properties: property_requirement.matching_properties, sortable: false } %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

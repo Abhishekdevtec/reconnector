@@ -1,0 +1,19 @@
+# domain_com_au localization support
+en:
+  activerecord:
+    attributes:
+      account:
+        domain_com_au_agency_id: Account ID
+        domain_com_au_client_id: Client ID
+        domain_com_au_encrypted_client_secret: Encrypted client secret
+        domain_com_au_client_secret: Client secret
+        domain_com_au_agents_and_listings_api_key: Agents & Listings API key
+        domain_com_au_properties_and_locations_api_key: Properties & Locations API key
+        domain_com_au_price_estimation_api_key: Price estimation API key
+        domain_com_au_address_suggestions_api_key: Address suggestions API key
+        domain_com_au_schools_data_api_key: Schools data API key
+        domain_com_au_listings_management_api_key: Listings management API key
+        domain_com_au_webhooks_api_key: Webhooks key
+        domain_com_au_webhooks_id: Webhooks ID
+        domain_com_au_webhooks_verification_code: Webhook Verification code
+

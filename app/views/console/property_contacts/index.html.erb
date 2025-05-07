@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Property Contacts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Contact</th>
+      <th>Classifiers</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @property_contacts.each do |property_contact| %>
+      <tr>
+        <td><%= property_contact.property_id %></td>
+        <td><%= property_contact.contact_id %></td>
+        <td><%= property_contact.classifications.count %></td>
+        <td><%= link_to 'Show', console_account_property_property_contact_path(@account, @property, property_contact) %></td>
+        <td><%= link_to 'Edit', edit_console_account_property_property_contact_path(@account, @property, property_contact) %></td>
+        <td><%= link_to 'Destroy', console_account_property_property_contact_path(@account, @property, property_contact), data: { turbo_method: :delete, confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Property Contact', new_console_account_property_property_contact_path(@account, @property) %>
