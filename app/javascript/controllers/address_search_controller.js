@@ -1,5 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
-import { get } from "@rails/request.js"
+import { Turbo } from "@hotwired/turbo-rails"
+// import { get } from "@rails/request.js"
 
 export default class extends Controller {
   static targets = ["searchPalette", "focus", "results", "streetNumber", "streetName", "suburb", "postcode", "state", "country"];
@@ -23,20 +24,32 @@ export default class extends Controller {
 
   // Manage standard input
   input(event) {
-    let searchQuery = event.target.value
-    if (searchQuery.length >= 10 && searchQuery[searchQuery.length-1] == ' ') {
-      let params = new URLSearchParams()
-      params.append(this.paramValue, searchQuery)
-      params.append("target", this.resultsTarget.id)
-      get(`${this.urlValue}?${params}`, {
-        responseKind: "turbo-stream"
-      })
+    const searchQuery = event.target.value;
+    if (searchQuery.length < 3) {
+      return this._clearResults();
     }
-    else if (searchQuery.length < 10) {
-      this._clearResults()
-    }
-  }
 
+    const params = new URLSearchParams();
+    params.append(this.paramValue, searchQuery);
+    params.append("target", this.resultsTarget.id);
+    const requestUrl = `${this.urlValue}?${params}`;
+
+    fetch(requestUrl, {
+      headers: { "Accept": "text/vnd.turbo-stream.html" },
+      credentials: "same-origin"
+    })
+      .then(response => {
+        if (!response.ok) throw new Error(response.statusText);
+        return response.text();
+      })
+      .then(html => {
+        // This will run the Turbo Stream tags and update your DOM
+        Turbo.renderStreamMessage(html);
+      })
+      .catch(error => {
+        console.error("Address search fetch failed:", error);
+      });
+  }
   // Manage escape and enter keys
   manage_keypress(event) {
     if (event.key == "Escape") {
@@ -68,6 +81,6 @@ export default class extends Controller {
   }
 
   _clearResults() {
-
+    this.resultsTarget.innerHTML = "";
   }
 }

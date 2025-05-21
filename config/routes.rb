@@ -18,6 +18,14 @@ Rails.application.routes.draw do
     end
   end
 
+  #Suburb and Postal_code Suggestions in Advance Search
+  resources :suburbs, only: [] do
+    collection do
+      get :autocomplete      
+      get :postal_codes    
+    end
+  end
+
   # Agent routes
   devise_for :agents
   resource :agent, only: %i[show edit update] do

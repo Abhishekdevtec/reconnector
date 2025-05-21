@@ -78,16 +78,40 @@
         <%= render FormLabelComponent.new(form: form, name: :district) %>
         <%= render FormCollectionSelectComponent.new(form: form, name: :district, collection: District.all.order(:name), attribute: :name, component_options: { include_blank: 'Select a value' }) %>
       </div>
-
+     
       <div class="col-span-6 sm:col-span-2">
-        <%= render FormLabelComponent.new(form: form, name: :Suburb) %>
-        <%= render FormTextFieldComponent.new(form: form, name: :city) %>
+        <%= render FormLabelComponent.new(form: form, name: :suburb) %>
+        <div data-controller="suburb-autocomplete" class="relative">
+          <%= form.text_field :suburb,
+              autocomplete: "off",
+              class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+              data: {
+                action: "input->suburb-autocomplete#search",
+                suburb_autocomplete_target: "input",
+                suburb_autocomplete_select_target: "hiddenId"
+              } %>
+
+          <input type="hidden" 
+                data-suburb-autocomplete-target="hiddenName" 
+                name="property_search_form[suburb_name]" />
+
+          <div
+            id="search_suburb_results"
+            data-suburb-autocomplete-target="suggestions"
+            class="hidden absolute top-full left-0 w-full max-h-60 overflow-auto mt-1 bg-white border border-gray-300 rounded-md shadow-lg z-50">
+          </div>
+        </div>
       </div>
 
-      <div class="col-span-6 sm:col-span-2">
+      <div class="col-span-6 sm:col-span-2" data-controller="postal-code">
         <%= render FormLabelComponent.new(form: form, name: :postal_code) %>
-        <%= render FormTextFieldComponent.new(form: form, name: :postal_code) %>
+        <%= form.select :postal_code, [],
+          { include_blank: 'Select a postal code' },
+          class: "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+          data: { postal_code_target: "select" } %>
       </div>
+
+
 
       <div class="col-span-3 sm:col-span-1">
         <%= render FormLabelComponent.new(form: form, name: :sale_price_min) %>
