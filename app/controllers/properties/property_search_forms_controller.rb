@@ -23,7 +23,7 @@ module Properties
       results = results.where('lower(usages::text)::text[] && array[?]::text[]', property_search_form_params[:usages]) if property_search_form_params[:usages].present?
       results = results.where(Property.arel_table[:street_name].lower.matches("%#{property_search_form_params[:street_name].downcase}%")) if property_search_form_params[:street_name].present?
       results = results.where(postal_code: property_search_form_params[:postal_code]) if property_search_form_params[:postal_code].present?
-      results = results.where(Property.arel_table[:city].lower.matches("%#{property_search_form_params[:city].downcase}%")) if property_search_form_params[:city].present?
+      results = results.where(Property.arel_table[:city].lower.matches("%#{property_search_form_params[:city].downcase.strip}%")) if property_search_form_params[:city].present?
       results = results.where(Property.arel_table[:state].lower.matches("%#{property_search_form_params[:state].downcase}%")) if property_search_form_params[:state].present?
       results = results.where(Property.arel_table[:country].lower.matches("%#{property_search_form_params[:country].downcase}%")) if property_search_form_params[:country].present?
       results = results.where('calculated_building_area >= ?', property_search_form_params[:total_area_min]) if property_search_form_params[:total_area_min].present?

@@ -47,7 +47,7 @@
 
     <div class="col-span-6 sm:col-span-6">
       <%= render FormLabelComponent.new(form: form, name: :search_address) %>
-      <%= render FormTextFieldComponent.new(form: form, name: :search_address, type: :text, data: { action: 'focus->address-search#toggle' }) %>
+      <%= render FormTextFieldComponent.new(form: form, name: :search_address, type: :text, data: { action: "focus->address-search#toggle input->address-search#input", address_search_target: "focus" }) %>
     </div>
 
   <% end %>

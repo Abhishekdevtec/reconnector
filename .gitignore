@@ -1,0 +1,87 @@
+# === Rails Specific ===
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/db/*.pgsql
+/db/*.dump
+/db/*.rdb
+/db/*.backup
+
+/storage/*
+!/storage/.keep
+
+/public/assets
+/public/packs
+/public/packs-test
+/public/.sass-cache
+
+/node_modules/
+/yarn-error.log
+.byebug_history
+
+# If using Puma, Spring, etc.
+/pids
+*.pid
+*.pid.lock
+
+# Ignore Rails master key and credentials
+/config/master.key
+/config/credentials.yml.enc
+
+# === Node / Frontend Specific ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+build/
+
+# === System Files ===
+*.swp
+*.bak
+*.tmp
+*.DS_Store
+Thumbs.db
+
+# === VS Code ===
+.vscode/
+
+# === Backup / Export Files ===
+*.dump
+*.rdb
+*.pgsql
+*.orig
+*.old
+
+# === dotenv Files (env secrets) ===
+.env
+.env.*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# === Custom Files in Your Project ===
+database_detail.txt
+myapp_dev_backup.dump
+dump.rdb
+dbexport.pgsql
+Gemfile.lock.orig
+
+# === Coverage / Test Artifacts ===
+coverage/
+spec/reports/
+test/tmp/
+test/version_tmp/
+test/fixtures/*.yml
+
+
+# Ignore temporary or local-only directories
+input/
+log/
+oftGraph/
+server_side/
